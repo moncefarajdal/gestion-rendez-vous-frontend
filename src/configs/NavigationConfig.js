@@ -40,7 +40,15 @@ const dashBoardNavTree = [
         ]
       }
     ]
-  }
+  },
+  {
+    key: 'technician',
+    path: `${APP_PREFIX_PATH}/technician/calendar`,
+    title: 'technician',
+    icon: DashboardOutlined,
+    breadcrumb: true,
+    submenu: []
+  },
 ]
 
 const appsNavTree = [{
@@ -78,9 +86,27 @@ const appsNavTree = [{
   ]
 }]
 
+// const technicianApps = [{
+//   key: 'technician',
+//   path: '',
+//   title: 'sidenav.apps',
+//   icon: AppstoreOutlined,
+//   breadcrumb: false,
+//   submenu: [
+//     {
+//       key: 'apps-technician',
+//       path: `${APP_PREFIX_PATH}/technician/calendar`,
+//       title: 'Techniciens',
+//       icon: BulbOutlined,
+//       breadcrumb: true,
+//     }
+//   ]
+// }]
+
 const navigationConfig = [
   ...dashBoardNavTree,
-  ...appsNavTree
+  ...appsNavTree,
+  // ...technicianApps
 ]
 
 export default navigationConfig;
