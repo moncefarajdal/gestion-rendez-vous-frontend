@@ -68,7 +68,7 @@ const appsNavTree = [{
         {
           key: 'apps-technicians-add',
           path: `${APP_PREFIX_PATH}/admin/technician/add-technician`,
-          title: 'Add a Technicien',
+          title: 'Add Technicien',
           icon: '',
           breadcrumb: false,
           submenu: []
