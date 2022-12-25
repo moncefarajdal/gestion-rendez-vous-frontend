@@ -9,6 +9,7 @@ import NumberFormat from 'react-number-format';
 import { useHistory } from "react-router-dom";
 import utils from 'utils';
 import { useNavigate } from "react-router-dom";
+import TachnicianData from './TachnicianData';
 
 const { Option } = Select
 
