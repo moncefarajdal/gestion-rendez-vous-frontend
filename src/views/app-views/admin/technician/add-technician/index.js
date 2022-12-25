@@ -1,10 +1,12 @@
 import React from 'react';
-import ProductForm from '../ProductForm';
+// import ProductForm from '../ProductForm';
 
 const AddTechnician = () => {
 	return (
 		// <ProductForm mode="ADD"/>
-        <h1 It works></h1>
+        <div>
+			Add technician component works!
+		</div>
 	)
 }
 

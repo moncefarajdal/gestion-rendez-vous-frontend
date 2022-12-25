@@ -21,13 +21,13 @@ const CalendarData = [
 		date: getDate(5),
 		event: [
 			{
-				title: 'Birthday Party',
+				title: 'Meeting',
 				bullet: 'cyan',
 				start: '11.00am',
 				end: '1.00pm',
 			},
 			{
-				title: 'Designer Meeting',
+				title: 'Appointment',
 				bullet: 'red',
 				start: '3.00pm',
 				end: '4.00pm',
@@ -38,8 +38,8 @@ const CalendarData = [
 		date: getDate(20),
 		event: [
 			{
-				title: 'Dave ceremony',
-				bullet: 'blue',
+				title: 'Appointment',
+				bullet: 'red',
 				start: '2.00pm',
 				end: '5.00pm',
 			}
@@ -49,7 +49,7 @@ const CalendarData = [
 		date: getDate(25),
 		event: [
 			{
-				title: 'Project discussion',
+				title: 'Managment Meeting',
 				bullet: 'gold',
 				start: '8.00pm',
 				end: '9.00pm',
