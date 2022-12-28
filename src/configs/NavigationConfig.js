@@ -43,7 +43,8 @@ const dashBoardNavTree = [
   }
 ]
 
-const appsNavTree = [{
+const appsNavTree = [
+  {
   key: 'apps',
   path: '',
   title: 'sidenav.apps',
@@ -69,6 +70,39 @@ const appsNavTree = [{
           key: 'apps-technicians-add',
           path: `${APP_PREFIX_PATH}/admin/technician/add-technician`,
           title: 'Add a Technicien',
+          icon: '',
+          breadcrumb: false,
+          submenu: []
+        }
+      ]
+    },
+    {
+      key: 'apps-succursales',
+      path: `${APP_PREFIX_PATH}/admin/succursale`,
+      title: 'Succursale',
+      icon: BulbOutlined,
+      breadcrumb: true,
+      submenu: [
+        {
+          key: 'apps-succursales-list',
+          path: `${APP_PREFIX_PATH}/admin/succursale/list-succursale`,
+          title: 'Succursales List',
+          icon: '',
+          breadcrumb: false,
+          submenu: []
+        },
+        {
+          key: 'apps-succursales-add',
+          path: `${APP_PREFIX_PATH}/admin/succursale/add-succursale`,
+          title: 'Add a Succursale',
+          icon: '',
+          breadcrumb: false,
+          submenu: []
+        },
+        {
+          key: 'apps-succursales-edit',
+          path: `${APP_PREFIX_PATH}/admin/succursale/edit-succursale`,
+          title: 'Edit a Succursale',
           icon: '',
           breadcrumb: false,
           submenu: []
