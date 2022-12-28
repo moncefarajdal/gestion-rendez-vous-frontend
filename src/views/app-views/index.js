@@ -12,9 +12,11 @@ export const AppViews = () => {
     <Suspense fallback={<Loading cover="content"/>}>
       <Switch>
         <Route path={`${APP_PREFIX_PATH}/home`} component={lazy(() => import(`./home`))} />
+        <Route path={`${APP_PREFIX_PATH}/technician`} component={lazy(() => import(`./technician/calendar`))} />
         <Route path={`${APP_PREFIX_PATH}/client`} component={ClientList} />
         <Route path={`${APP_PREFIX_PATH}/admin/technician`} component={TechnicianList} />
         <Route path={`${AUTH_PREFIX_PATH}/login`} component={lazy(() => import(`../auth-views/components/sign-in-form`))} />
+        <Route path={`${AUTH_PREFIX_PATH}/register`} component={lazy(() => import(`../auth-views/components/sign-up-form`))} />
         <Redirect from={`${APP_PREFIX_PATH}`} to={`${APP_PREFIX_PATH}/home`} />
       </Switch>
     </Suspense>
