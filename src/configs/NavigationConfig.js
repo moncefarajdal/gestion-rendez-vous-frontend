@@ -46,7 +46,7 @@ const dashBoardNavTree = [
     path: `${APP_PREFIX_PATH}/technician/calendar`,
     title: 'technician',
     icon: DashboardOutlined,
-    breadcrumb: true,
+    breadcrumb: false,
     submenu: []
   },
 ]
