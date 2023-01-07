@@ -1,7 +1,7 @@
 import React from 'react';
 // import ProductForm from '../ProductForm';
 
-const AddTechnician = () => {
+const AddSuccursale = () => {
 	return (
 		// <ProductForm mode="ADD"/>
         <div>
@@ -10,4 +10,4 @@ const AddTechnician = () => {
 	)
 }
 
-export default AddTechnician
+export default AddSuccursale

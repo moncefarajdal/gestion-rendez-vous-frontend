@@ -85,14 +85,14 @@ const appsNavTree = [{
     },
     {
       key: 'apps-succursale',
-      path: `${APP_PREFIX_PATH}/admin/succursale`,
+      path: `${APP_PREFIX_PATH}/super-admin/succursale`,
       title: 'Succursales',
       icon: BulbOutlined,
       breadcrumb: true,
       submenu: [
         {
           key: 'apps-succursales-list',
-          path: `${APP_PREFIX_PATH}/super-admin/succursale/add-succursale`,
+          path: `${APP_PREFIX_PATH}/super-admin/succursale/list-succursale`,
           title: 'Succursales List',
           icon: '',
           breadcrumb: false,
@@ -100,7 +100,7 @@ const appsNavTree = [{
         },
         {
           key: 'apps-succursales-add',
-          path: `${APP_PREFIX_PATH}/admin/succursale/add-succursale`,
+          path: `${APP_PREFIX_PATH}/super-admin/succursale/add-succursale`,
           title: 'Add Succursale',
           icon: '',
           breadcrumb: false,
@@ -108,8 +108,11 @@ const appsNavTree = [{
         },
         {
           key: 'apps-succursales-edit',
-          path: `${APP_PREFIX_PATH}/admin/succursale/edit-succursale`,
+          path: `${APP_PREFIX_PATH}/super-admin/succursale/edit-succursale`,
           title: 'Edit Succursale',
+          icon: '',
+          breadcrumb: false,
+          submenu: []
         }
       ]
     }
