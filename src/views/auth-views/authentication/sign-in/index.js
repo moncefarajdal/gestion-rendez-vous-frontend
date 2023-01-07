@@ -1,5 +1,5 @@
 import React from 'react'
-import LoginForm from '../../components/LoginForm'
+import LoginForm from '../../components/sign-in-form'
 import { Card, Row, Col } from "antd";
 import { useSelector } from 'react-redux';
 

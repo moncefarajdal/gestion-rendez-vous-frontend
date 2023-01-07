@@ -9,7 +9,7 @@ import NumberFormat from 'react-number-format';
 import { useHistory } from "react-router-dom";
 import utils from 'utils';
 import { useNavigate } from "react-router-dom";
-import TachnicianData from './TachnicianData';
+
 
 const { Option } = Select
 
@@ -28,7 +28,7 @@ const getStockStatus = stockCount => {
 
 const categories = ['Cloths', 'Bags', 'Shoes', 'Watches', 'Devices']
 
-const TechnicienList = () => {
+const SuccursaleList = () => {
 	let history = useHistory();
 	const [list, setList] = useState(ProductListData)
 	const [selectedRows, setSelectedRows] = useState([])
@@ -226,4 +226,4 @@ const TechnicienList = () => {
 	)
 }
 
-export default TechnicienList
+export default SuccursaleList
