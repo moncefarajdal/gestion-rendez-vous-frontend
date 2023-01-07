@@ -110,9 +110,6 @@ const appsNavTree = [{
           key: 'apps-succursales-edit',
           path: `${APP_PREFIX_PATH}/admin/succursale/edit-succursale`,
           title: 'Edit Succursale',
-          icon: '',
-          breadcrumb: false,
-          submenu: []
         }
       ]
     }
