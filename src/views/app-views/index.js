@@ -14,7 +14,7 @@ export const AppViews = () => {
         <Route path={`${APP_PREFIX_PATH}/home`} component={lazy(() => import(`./home`))} />
         <Route path={`${APP_PREFIX_PATH}/technician`} component={lazy(() => import(`./technician/calendar`))} />
         <Route path={`${APP_PREFIX_PATH}/client`} component={ClientList} />
-        <Route path={`${APP_PREFIX_PATH}/admin/technician`} component={TechnicianList} />
+        <Route path={`${APP_PREFIX_PATH}/admin/technician/list-technician`} component={TechnicianList} />
         <Route path={`${APP_PREFIX_PATH}/admin/technician/add-technician`} component={lazy(() => import(`./admin/technician/add-technician`))} />
         <Route path={`${APP_PREFIX_PATH}/super-admin/succursale`} component={SuccursaleList} />
         <Route path={`${APP_PREFIX_PATH}/super-admin/succursale/add-succursale`} component={lazy(() => import(`./super-admin/succursale/add-succursale`))} />
