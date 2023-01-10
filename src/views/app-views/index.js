@@ -18,6 +18,7 @@ export const AppViews = () => {
         <Route path={`${APP_PREFIX_PATH}/admin/technician/add-technician`} component={lazy(() => import(`./admin/technician/add-technician`))} />
         <Route path={`${APP_PREFIX_PATH}/super-admin/succursale`} component={SuccursaleList} />
         <Route path={`${APP_PREFIX_PATH}/super-admin/succursale/add-succursale`} component={lazy(() => import(`./super-admin/succursale/add-succursale`))} />
+        <Route path={`${APP_PREFIX_PATH}/technicien/client/add-client`} component={lazy(() => import(`./utils/add/add-client`))} />
         <Redirect from={`${APP_PREFIX_PATH}`} to={`${APP_PREFIX_PATH}/home`} />
       </Switch>
     </Suspense>

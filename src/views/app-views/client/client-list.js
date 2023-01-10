@@ -50,7 +50,7 @@ const ClientList = () => {
 	);
 	
 	const addProduct = () => {
-		history.push(`/app/apps/ecommerce/add-product`)
+		history.push(`/app/technicien/client/add-client`)
 	}
 	
 	const viewDetails = row => {
