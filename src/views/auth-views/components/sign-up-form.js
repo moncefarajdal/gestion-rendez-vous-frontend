@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { LockOutlined, MailOutlined } from '@ant-design/icons';
 import { Button, Form, Input, Alert } from "antd";
@@ -6,26 +6,27 @@ import { showAuthMessage, showLoading, hideAuthMessage, authenticated } from 're
 import { useHistory } from "react-router-dom";
 import { motion } from "framer-motion"
 import JwtAuthService from 'services/JwtAuthService'
+import AuthService from 'services/AuthService';
 
 const rules = {
 	email: [
-		{ 
+		{
 			required: true,
 			message: 'Please input your email address'
 		},
-		{ 
+		{
 			type: 'email',
 			message: 'Please enter a validate email!'
 		}
 	],
 	password: [
-		{ 
+		{
 			required: true,
 			message: 'Please input your password'
 		}
 	],
 	confirm: [
-		{ 
+		{
 			required: true,
 			message: 'Please confirm your password!'
 		},
@@ -47,7 +48,7 @@ export const RegisterForm = (props) => {
 	let history = useHistory();
 
 	const onSignUp = () => {
-    	form.validateFields().then(values => {
+		form.validateFields().then(values => {
 			showLoading()
 			const fakeToken = 'fakeToken'
 			JwtAuthService.signUp(values).then(resp => {
@@ -61,53 +62,86 @@ export const RegisterForm = (props) => {
 	}
 
 	useEffect(() => {
-    	if (token !== null && allowRedirect) {
+		if (token !== null && allowRedirect) {
 			history.push(redirect)
 		}
-		if(showMessage) {
-				setTimeout(() => {
+		if (showMessage) {
+			setTimeout(() => {
 				hideAuthMessage();
 			}, 3000);
 		}
-  });
-	
+	});
+
+	// Login service
+	const [username, setUsername] = useState("")
+	const [email, setEmail] = useState("")
+	const [password, setPassword] = useState("")
+
+	function handleRegister() {
+		AuthService.register(username, email, password)
+		.then(response => {
+				console.log("user added successfuly")
+			},
+			error => {
+				const resMessage =
+					(error.response &&
+						error.response.data &&
+						error.response.data.message) ||
+					error.message ||
+					error.toString();
+
+				this.setState({
+					successful: false,
+					message: resMessage
+				});
+			}
+		);
+	}
+
 	return (
 		<>
-			<motion.div 
-				initial={{ opacity: 0, marginBottom: 0 }} 
-				animate={{ 
+			<motion.div
+				initial={{ opacity: 0, marginBottom: 0 }}
+				animate={{
 					opacity: showMessage ? 1 : 0,
-					marginBottom: showMessage ? 20 : 0 
-				}}> 
+					marginBottom: showMessage ? 20 : 0
+				}}>
 				<Alert type="error" showIcon message={message}></Alert>
 			</motion.div>
 			<Form form={form} layout="vertical" name="register-form" onFinish={onSignUp}>
-				<Form.Item 
-					name="email" 
-					label="Email" 
+				<Form.Item
+					name="email"
+					label="Email"
 					rules={rules.email}
 					hasFeedback
 				>
-					<Input prefix={<MailOutlined className="text-primary" />}/>
+					<Input prefix={<MailOutlined className="text-primary" />} value={email} onChange={(e) => setEmail(e.target.value)} />
 				</Form.Item>
-				<Form.Item 
-					name="password" 
-					label="Password" 
+				<Form.Item
+					name="username"
+					label="Username"
+					hasFeedback
+				>
+					<Input prefix={<MailOutlined className="text-primary" />} value={username} onChange={(e) => setUsername(e.target.value)} />
+				</Form.Item>
+				<Form.Item
+					name="password"
+					label="Password"
 					rules={rules.password}
 					hasFeedback
 				>
-					<Input.Password prefix={<LockOutlined className="text-primary" />}/>
+					<Input.Password prefix={<LockOutlined className="text-primary" />} value={password} onChange={(e) => setPassword(e.target.value)} />
 				</Form.Item>
-				<Form.Item 
-					name="confirm" 
-					label="ConfirmPassword" 
+				{/* <Form.Item
+					name="confirm"
+					label="ConfirmPassword"
 					rules={rules.confirm}
 					hasFeedback
 				>
-					<Input.Password prefix={<LockOutlined className="text-primary" />}/>
-				</Form.Item>
+					<Input.Password prefix={<LockOutlined className="text-primary" />} />
+				</Form.Item> */}
 				<Form.Item>
-					<Button type="primary" htmlType="submit" block loading={loading}>
+					<Button type="primary" htmlType="submit" block loading={loading} onClick={() => handleRegister()}>
 						Sign Up
 					</Button>
 				</Form.Item>
@@ -116,9 +150,9 @@ export const RegisterForm = (props) => {
 	)
 }
 
-const mapStateToProps = ({auth}) => {
+const mapStateToProps = ({ auth }) => {
 	const { loading, message, showMessage, token, redirect } = auth;
-  return { loading, message, showMessage, token, redirect }
+	return { loading, message, showMessage, token, redirect }
 }
 
 const mapDispatchToProps = {
