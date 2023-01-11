@@ -3,8 +3,6 @@ import PageHeaderAlt from 'components/layout-components/PageHeaderAlt'
 import { Tabs, Form, Button, message } from 'antd';
 import Flex from 'components/shared-components/Flex'
 import GeneralField from './GeneralField'
-import VariationField from './VariationField'
-import ShippingField from './ShippingField'
 import ProductListData from "assets/data/product-list.data.json"
 
 const { TabPane } = Tabs;
@@ -23,6 +21,10 @@ const ProductForm = props => {
 	const { mode = ADD, param } = props
 
 	const [form] = Form.useForm();
+	const[nom,setName]=useState('')
+	const[adresse,setAdress]=useState('')
+	const[service,useService]=useState('')
+	const[societe]=useState('')
 	const [uploadedImg, setImage] = useState('')
 	const [uploadLoading, setUploadLoading] = useState(false)
 	const [submitLoading, setSubmitLoading] = useState(false)
@@ -60,6 +62,22 @@ const ProductForm = props => {
 			});
 		}
 	};
+	const handleClick =(e)=>{
+		e.preventDefault()
+		const succursale ={nom,adresse,service,societe}
+		console.log(succursale)
+		fetch("http://localhost:8090/api/v1/succursale/",{
+			method:"POST",
+			headers:{"Content-Type":"application/json","Accept": "application/json"},
+			body:JSON.stringify(succursale)
+
+		}).then(()=>{
+			console.log("success")
+		});
+
+
+
+	};
 
 	const onFinish = () => {
 		setSubmitLoading(true)
@@ -96,11 +114,11 @@ const ProductForm = props => {
 				<PageHeaderAlt className="border-bottom" overlap>
 					<div className="container">
 						<Flex className="py-2" mobileFlex={false} justifyContent="between" alignItems="center">
-							<h2 className="mb-3">{mode === 'ADD'? 'Add New Product' : `Edit Product`} </h2>
+							<h2 className="mb-3">{mode === 'ADD'? 'Add New Succursale' : `Edit Product`} </h2>
 							<div className="mb-3">
 								<Button className="mr-2">Discard</Button>
-								<Button type="primary" onClick={() => onFinish()} htmlType="submit" loading={submitLoading} >
-									{mode === 'ADD'? 'Add' : `Save`}
+								<Button type="primary" onClick={handleClick} htmlType="submit" >
+								{mode === 'ADD'? 'Add' : `Save`}
 								</Button>
 							</div>
 						</Flex>
@@ -115,12 +133,7 @@ const ProductForm = props => {
 								handleUploadChange={handleUploadChange}
 							/>
 						</TabPane>
-						<TabPane tab="Variation" key="2">
-							<VariationField />
-						</TabPane>
-						<TabPane tab="Shipping" key="3">
-							<ShippingField />
-						</TabPane>
+						
 					</Tabs>
 				</div>
 			</Form>

@@ -3,8 +3,6 @@ import PageHeaderAlt from 'components/layout-components/PageHeaderAlt'
 import { Tabs, Form, Button, message } from 'antd';
 import Flex from 'components/shared-components/Flex'
 import GeneralField from './GeneralField'
-import VariationField from './VariationField'
-import ShippingField from './ShippingField'
 import ProductListData from "assets/data/product-list.data.json"
 
 const { TabPane } = Tabs;
@@ -115,12 +113,7 @@ const ProductForm = props => {
 								handleUploadChange={handleUploadChange}
 							/>
 						</TabPane>
-						<TabPane tab="Variation" key="2">
-							<VariationField />
-						</TabPane>
-						<TabPane tab="Shipping" key="3">
-							<ShippingField />
-						</TabPane>
+						
 					</Tabs>
 				</div>
 			</Form>

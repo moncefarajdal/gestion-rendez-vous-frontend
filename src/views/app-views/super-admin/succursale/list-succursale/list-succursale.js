@@ -86,21 +86,27 @@ const SuccursaleList = () => {
 			dataIndex: 'id'
 		},
 		{
-			title: 'First Name',
-			dataIndex: 'firstName'
+			title: 'Name',
+			dataIndex: 'name'
 		},
 		{
-			title: 'Last Name',
-			dataIndex: 'lastName'
+			title: 'Adresse',
+			dataIndex: 'adresse'
 		},
 		{
-			title: 'Email',
-			dataIndex: 'email'
+			title: 'Service',
+			dataIndex: 'service'
 		},
 		{
-			title: 'Succursale',
-			dataIndex: 'succursale'
-		},
+			title: 'Actions',
+			dataIndex: 'Actions',
+			render: (_, elm) => (
+				<div className="text-right">
+					<EllipsisDropdown menu={dropdownMenu(elm)}/>
+				</div>
+			)
+		}
+		
 		// {
 		// 	title: 'Product',
 		// 	dataIndex: 'name',
@@ -144,15 +150,7 @@ const SuccursaleList = () => {
 		// 	),
 		// 	sorter: (a, b) => utils.antdTableSorter(a, b, 'stock')
 		// },
-		{
-			title: 'Actions',
-			dataIndex: 'Actions',
-			render: (_, elm) => (
-				<div className="text-right">
-					<EllipsisDropdown menu={dropdownMenu(elm)}/>
-				</div>
-			)
-		}
+		
 	];
 	
 	const rowSelection = {
