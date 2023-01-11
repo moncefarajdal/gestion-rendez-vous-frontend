@@ -49,7 +49,7 @@ const ClientList = () => {
 		</Menu>
 	);
 	
-	const addProduct = () => {
+	const addClient = () => {
 		history.push(`/app/technicien/client/add-client`)
 	}
 	
@@ -181,7 +181,7 @@ const ClientList = () => {
 					</div>
 				</Flex>
 				<div>
-					<Button onClick={addProduct} type="primary" icon={<PlusCircleOutlined />} block>Add product</Button>
+					<Button onClick={addClient} type="primary" icon={<PlusCircleOutlined />} block>Add Client</Button>
 				</div>
 			</Flex>
 			<div className="table-responsive">

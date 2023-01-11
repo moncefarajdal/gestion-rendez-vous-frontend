@@ -15,10 +15,10 @@ export const AppViews = () => {
         <Route path={`${APP_PREFIX_PATH}/technician`} component={lazy(() => import(`./technician/calendar`))} />
         <Route path={`${APP_PREFIX_PATH}/client`} component={ClientList} />
         <Route path={`${APP_PREFIX_PATH}/admin/technician/list-technician`} component={TechnicianList} />
-        <Route path={`${APP_PREFIX_PATH}/admin/technician/add-technician`} component={lazy(() => import(`./admin/technician/add-technician`))} />
-        <Route path={`${APP_PREFIX_PATH}/super-admin/succursale`} component={SuccursaleList} />
-        <Route path={`${APP_PREFIX_PATH}/super-admin/succursale/add-succursale`} component={lazy(() => import(`./super-admin/succursale/add-succursale`))} />
+        <Route path={`${APP_PREFIX_PATH}/super-admin/succursale/list-succursale`} component={SuccursaleList} />
         <Route path={`${APP_PREFIX_PATH}/technicien/client/add-client`} component={lazy(() => import(`./utils/add/add-client`))} />
+        <Route path={`${APP_PREFIX_PATH}/admin/technicien/add-technicien`} component={lazy(() => import(`./utils/add/add-technicien`))} />
+        <Route path={`${APP_PREFIX_PATH}/super-admin/succursale/add-succursale`} component={lazy(() => import(`./utils/add/add-succursale`))} />
         <Redirect from={`${APP_PREFIX_PATH}`} to={`${APP_PREFIX_PATH}/home`} />
       </Switch>
     </Suspense>

@@ -58,7 +58,7 @@ const TechnicienList = () => {
 	);
 	
 	const addTechnician = () => {
-		history.push(`/app/admin/technician/add-technician`)
+		history.push(`/app/admin/technicien/add-technicien`)
 	}
 	
 	const viewDetails = row => {

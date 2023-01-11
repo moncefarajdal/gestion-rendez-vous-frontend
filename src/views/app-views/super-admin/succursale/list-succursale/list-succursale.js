@@ -57,8 +57,8 @@ const SuccursaleList = () => {
 		</Menu>
 	);
 	
-	const addTechnician = () => {
-		history.push(`/app/admin/technician/add-technician`)
+	const addSuccursale = () => {
+		history.push(`/app/super-admin/succursale/add-succursale`)
 	}
 	
 	const viewDetails = row => {
@@ -205,7 +205,7 @@ const SuccursaleList = () => {
 					</div>
 				</Flex>
 				<div>
-					<Button onClick={addTechnician} type="primary" icon={<PlusCircleOutlined />} block>Add technician</Button>
+					<Button onClick={addSuccursale} type="primary" icon={<PlusCircleOutlined />} block>Add Succursale</Button>
 					{/* <Button onClick={routeChange} type="primary" icon={<PlusCircleOutlined />} block>Add technician</Button> */}
 				</div>
 			</Flex>
