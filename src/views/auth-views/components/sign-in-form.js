@@ -58,46 +58,10 @@ export const LoginForm = (props) => {
 	// Login service
 	const [username, setUsername] = useState("")
 	const [password, setPassword] = useState("")
-	// const [jwt, setJwt] = useLocalState("", "jwt")
-
-	console.log(username)
-	console.log(password)
-
-	async function login() {
-		const loginRequest = {
-			username: username,
-			password: password
-		};
-
-		fetch("http://localhost:8090/api/v1/sign-in", {
-			headers: {
-				"Content-Type": "application/json",
-			},
-			method: "post",
-			body: JSON.stringify(loginRequest),
-		})
-			// .then((response) => Promise.all([response.json(), response.headers]))
-			// .then(([body, headers]) => {
-			// 	setJwt(headers.get("authorization"));
-			// 	console.log(jwt)
-			// 	window.location.href = "app/home"
-			// });
-			.then((response) => response.json())
-			.then((data) => {
-				console.log(data)
-				alert("Success !!");
-			})
-			.catch((err) => err);
-
-
-	};
 
 	function handleLogin(e) {
-		// e.preventDefault();
 		AuthService.login(username, password).then(
 			() => {
-				// this.props.router.navigate("/app/home");
-				// window.location.reload();
 				history.push(`/app/home`)
 				console.log("Success")
 			},
