@@ -7,7 +7,7 @@ export const AppViews = () => {
   return (
     <Suspense fallback={<Loading cover="page"/>}>
       <Switch>
-        <Route path={`${AUTH_PREFIX_PATH}/login`} component={lazy(() => import(`./components/sign-in-form`))} />
+        <Route path={`${AUTH_PREFIX_PATH}/login`} component={lazy(() => import(`./authentication/sign-in`))} />
         <Route path={`${AUTH_PREFIX_PATH}/register`} component={lazy(() => import(`./components/sign-up-form`))} />
         <Redirect from={`${AUTH_PREFIX_PATH}`} to={`${AUTH_PREFIX_PATH}/login`} />
       </Switch>
