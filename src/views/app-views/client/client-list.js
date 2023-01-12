@@ -49,8 +49,8 @@ const ClientList = () => {
 		</Menu>
 	);
 	
-	const addClient = () => {
-		history.push(`/app/technicien/client/add-client`)
+	const addProduct = () => {
+		history.push(`/app/apps/ecommerce/add-product`)
 	}
 	
 	const viewDetails = row => {
@@ -181,7 +181,7 @@ const ClientList = () => {
 					</div>
 				</Flex>
 				<div>
-					<Button onClick={addClient} type="primary" icon={<PlusCircleOutlined />} block>Add Client</Button>
+					<Button onClick={addProduct} type="primary" icon={<PlusCircleOutlined />} block>Add product</Button>
 				</div>
 			</Flex>
 			<div className="table-responsive">
