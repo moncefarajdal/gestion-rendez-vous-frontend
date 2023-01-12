@@ -14,7 +14,6 @@ import {
 import JwtAuthService from 'services/JwtAuthService'
 import { useHistory, useLocation } from "react-router-dom";
 import { motion } from "framer-motion"
-import setJWTToken from "../../../auth/setJWTToken"
 import AuthService from 'services/AuthService';
 
 export const LoginForm = (props) => {
