@@ -1,13 +1,10 @@
 import React from 'react';
-// import ProductForm from '../ProductForm';
+import ProductForm from '../../../forms/add-succursale-form';
 
-const AddSuccursale = () => {
+const addSuccursale= () => {
 	return (
-		// <ProductForm mode="ADD"/>
-        <div>
-			Add technician component works!
-		</div>
+		<ProductForm mode="ADD"/>
 	)
 }
 
-export default AddSuccursale
+export default addSuccursale

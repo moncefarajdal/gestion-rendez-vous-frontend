@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import PageHeaderAlt from 'components/layout-components/PageHeaderAlt'
-import { Tabs, Form, Button, message } from 'antd';
 import Flex from 'components/shared-components/Flex'
 import GeneralField from './GeneralField'
 import ProductListData from "assets/data/product-list.data.json"
+import { Tabs,Button,Input, Row, Col, Card, Form, Upload, InputNumber, message, Select} from 'antd';
+import axios from 'axios'
+import save from 'save'
+import service from 'auth/FetchInterceptor'
 
 const { TabPane } = Tabs;
 
@@ -16,6 +19,17 @@ const getBase64 = (img, callback) => {
 const ADD = 'ADD'
 const EDIT = 'EDIT'
 
+function saveSuccursale(adresse,nom,service,societe){
+	return axios.post("http://localhost:8090/api/v1/succursale/",{
+	   adresse,
+	   nom,
+	   service,
+	   societe
+	});
+
+}
+
+
 const ProductForm = props => {
 
 	const { mode = ADD, param } = props
@@ -23,8 +37,8 @@ const ProductForm = props => {
 	const [form] = Form.useForm();
 	const[nom,setName]=useState('')
 	const[adresse,setAdress]=useState('')
-	const[service,useService]=useState('')
-	const[societe]=useState('')
+	const[service,setService]=useState('')
+	const[societe,setSociete]=useState('')
 	const [uploadedImg, setImage] = useState('')
 	const [uploadLoading, setUploadLoading] = useState(false)
 	const [submitLoading, setSubmitLoading] = useState(false)
@@ -62,16 +76,16 @@ const ProductForm = props => {
 			});
 		}
 	};
+	
+	
 	const handleClick =(e)=>{
 		e.preventDefault()
-		const succursale ={nom,adresse,service,societe}
-		console.log(succursale)
-		fetch("http://localhost:8090/api/v1/succursale/",{
-			method:"POST",
-			headers:{"Content-Type":"application/json","Accept": "application/json"},
-			body:JSON.stringify(succursale)
-
-		}).then(()=>{
+		axios.post("http://localhost:8090/api/v1/succursale/",{adresse,nom,service,societe}, {
+			headers: {
+			  Accept: "application/json",
+			  "Content-Type": "application/json;charset=UTF-8",
+			},
+		  }).then(()=>{
 			console.log("success")
 		});
 
@@ -97,6 +111,12 @@ const ProductForm = props => {
 			message.error('Please enter all required field ');
 		});
 	};
+	function handleSave(){
+		saveSuccursale(service,nom,adresse,societe).then(response=>{
+			console.log("success")
+		});
+
+	};
 
 	return (
 		<>
@@ -117,7 +137,9 @@ const ProductForm = props => {
 							<h2 className="mb-3">{mode === 'ADD'? 'Add New Succursale' : `Edit Product`} </h2>
 							<div className="mb-3">
 								<Button className="mr-2">Discard</Button>
-								<Button type="primary" onClick={handleClick} htmlType="submit" >
+								<Button type="primary" onClick={()=>handleSave(function handleSave(){
+	saveSuccursale(adresse,)
+})} htmlType="submit" >
 								{mode === 'ADD'? 'Add' : `Save`}
 								</Button>
 							</div>
@@ -127,11 +149,27 @@ const ProductForm = props => {
 				<div className="container">
 					<Tabs defaultActiveKey="1" style={{marginTop: 30}}>
 						<TabPane tab="General" key="1">
-							<GeneralField 
-								uploadedImg={uploadedImg} 
-								uploadLoading={uploadLoading} 
-								handleUploadChange={handleUploadChange}
-							/>
+						<Row gutter={16}>
+		<Col xs={24} sm={24} md={17}>
+			<Card title="Basic Info">
+				<Form.Item name="nom" label="Name" >
+					<Input placeholder="Succursale Name" onChange={(e)=>setName(e.target.value)}/>
+				</Form.Item>
+				<Form.Item name="service" label="Service" >
+					<Input placeholder="Succursale Service" onChange={(e)=>setService(e.target.value)}/>
+				</Form.Item>
+				<Form.Item name="adresse" label="Adress" >
+					<Input placeholder="Succursale Adress" onChange={(e)=>setAdress(e.target.value)}/>
+				</Form.Item>
+				<Form.Item name="societe" label="Societe" >
+					<Input placeholder="Succursale Adress" onChange={(e)=>setSociete(e.target.value)} />
+				</Form.Item>
+				
+			</Card>
+			
+		</Col>
+		
+	</Row>
 						</TabPane>
 						
 					</Tabs>
