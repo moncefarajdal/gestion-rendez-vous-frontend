@@ -137,7 +137,9 @@ const ProductForm = props => {
 							<h2 className="mb-3">{mode === 'ADD'? 'Add New Succursale' : `Edit Product`} </h2>
 							<div className="mb-3">
 								<Button className="mr-2">Discard</Button>
-								<Button type="primary" onClick={()=>handleSave()} htmlType="submit" >
+								<Button type="primary" onClick={()=>handleSave(function handleSave(){
+	saveSuccursale(adresse,)
+})} htmlType="submit" >
 								{mode === 'ADD'? 'Add' : `Save`}
 								</Button>
 							</div>
