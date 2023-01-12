@@ -1,7 +1,12 @@
 import axios from "axios";
+import { useState } from "react";
+import User from "../models/User"
 
 // const API_URL = "http://localhost:8090/api/v1/";
 const API_URL = "http://localhost:8090/";
+// const [authenticatedUser, setAuthenticatedUser] = useState("")
+// const authenticatedUser = new User()
+// const [authenticated, setAuthenticated] = useState("")
 
 class AuthService {
     login(username, password) {
@@ -11,13 +16,6 @@ class AuthService {
                 password
             })
             .then(response => {
-                // const jwt = response.headers.get('Authorization')
-                // if(!jwt) localStorage.setItem('token', jwt);
-                // if (response.data.accessToken) {
-                //     // localStorage.setItem("Authorization", JSON.stringify(response.data));
-                //     localStorage.setItem("token", JSON.stringify(response.data));
-                // }
-                // return response.data;
                 if (response.headers.get('Authorization')) {
                     localStorage.setItem('token', JSON.stringify(response.headers.get('Authorization')))
                 }
@@ -26,7 +24,7 @@ class AuthService {
     }
 
     logout() {
-        localStorage.removeItem("user");
+        localStorage.removeItem('token');
     }
 
     register(username, email, password) {
@@ -40,6 +38,28 @@ class AuthService {
     getCurrentUser() {
         return JSON.parse(localStorage.getItem('user'));;
     }
+
+    decode() {
+        // const helper = new JwtHelperService()
+        // return helper.decodeToken(localStorage.getItem('token'));
+    }
+
+    // loadInfos() {
+    //     const tokenDecoded = decode();
+    //     const username = tokenDecoded.sub;
+    //     const roles = tokenDecoded.roles;
+    //     const email = tokenDecoded.email;
+    //     const prenom = tokenDecoded.prenom;
+    //     const nom = tokenDecoded.nom;
+    //     this.authenticatedUser.username = username;
+    //     this.authenticatedUser.nom = nom;
+    //     this.authenticatedUser.prenom = prenom;
+    //     this.authenticatedUser.email = email;
+    //     this.authenticatedUser.roles = roles;
+    //     console.log(this.authenticatedUser.roles);
+    //     localStorage.setItem('token', tokenDecoded);
+    //     setAuthenticated = true
+    // }
 }
 
 export default new AuthService();
