@@ -57,8 +57,8 @@ const SuccursaleList = () => {
 		</Menu>
 	);
 	
-	const addSuccursale = () => {
-		history.push(`/app/super-admin/succursale/add-succursale`)
+	const addTechnician = () => {
+		history.push(`/app/admin/technician/add-technician`)
 	}
 	
 	const viewDetails = row => {
@@ -86,27 +86,21 @@ const SuccursaleList = () => {
 			dataIndex: 'id'
 		},
 		{
-			title: 'Name',
-			dataIndex: 'name'
+			title: 'First Name',
+			dataIndex: 'firstName'
 		},
 		{
-			title: 'Adresse',
-			dataIndex: 'adresse'
+			title: 'Last Name',
+			dataIndex: 'lastName'
 		},
 		{
-			title: 'Service',
-			dataIndex: 'service'
+			title: 'Email',
+			dataIndex: 'email'
 		},
 		{
-			title: 'Actions',
-			dataIndex: 'Actions',
-			render: (_, elm) => (
-				<div className="text-right">
-					<EllipsisDropdown menu={dropdownMenu(elm)}/>
-				</div>
-			)
-		}
-		
+			title: 'Succursale',
+			dataIndex: 'succursale'
+		},
 		// {
 		// 	title: 'Product',
 		// 	dataIndex: 'name',
@@ -150,7 +144,15 @@ const SuccursaleList = () => {
 		// 	),
 		// 	sorter: (a, b) => utils.antdTableSorter(a, b, 'stock')
 		// },
-		
+		{
+			title: 'Actions',
+			dataIndex: 'Actions',
+			render: (_, elm) => (
+				<div className="text-right">
+					<EllipsisDropdown menu={dropdownMenu(elm)}/>
+				</div>
+			)
+		}
 	];
 	
 	const rowSelection = {
@@ -203,7 +205,7 @@ const SuccursaleList = () => {
 					</div>
 				</Flex>
 				<div>
-					<Button onClick={addSuccursale} type="primary" icon={<PlusCircleOutlined />} block>Add Succursale</Button>
+					<Button onClick={addTechnician} type="primary" icon={<PlusCircleOutlined />} block>Add technician</Button>
 					{/* <Button onClick={routeChange} type="primary" icon={<PlusCircleOutlined />} block>Add technician</Button> */}
 				</div>
 			</Flex>

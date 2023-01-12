@@ -37,7 +37,6 @@ const dashBoardNavTree = [
             breadcrumb: true,
             submenu: []
           },
-          
         ]
       }
     ]
@@ -84,7 +83,6 @@ const appsNavTree = [{
         }
       ]
     },
- 
     {
       key: 'apps-succursale',
       path: `${APP_PREFIX_PATH}/super-admin/succursale`,
@@ -99,9 +97,25 @@ const appsNavTree = [{
           icon: '',
           breadcrumb: false,
           submenu: []
+        },
+        {
+          key: 'apps-succursales-add',
+          path: `${APP_PREFIX_PATH}/super-admin/succursale/add-succursale`,
+          title: 'Add Succursale',
+          icon: '',
+          breadcrumb: false,
+          submenu: []
+        },
+        {
+          key: 'apps-succursales-edit',
+          path: `${APP_PREFIX_PATH}/super-admin/succursale/edit-succursale`,
+          title: 'Edit Succursale',
+          icon: '',
+          breadcrumb: false,
+          submenu: []
         }
       ]
-    },
+    }
   ]
 }]
 

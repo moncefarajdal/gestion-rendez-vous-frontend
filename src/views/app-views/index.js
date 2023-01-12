@@ -12,12 +12,12 @@ export const AppViews = () => {
   return (
     <Suspense fallback={<Loading cover="content"/>}>
       <Switch>
+        {/* <Route path={`${APP_PREFIX_PATH}/home`} component={lazy(() => import(`./home`))} /> */}
         <PrivateRoute path={`${APP_PREFIX_PATH}/technician`} component={lazy(() => import(`./technician/calendar`))} />
         <PrivateRoute path={`${APP_PREFIX_PATH}/client`} component={ClientList} />
-        <PrivateRoute path={`${APP_PREFIX_PATH}/technicien/client/add-client`} component={lazy(() => import(`./utils/add/add-client`))}  />
         <PrivateRoute path={`${APP_PREFIX_PATH}/admin/technician/list-technician`} component={TechnicianList} />
         <PrivateRoute path={`${APP_PREFIX_PATH}/admin/technician/add-technician`} component={lazy(() => import(`./admin/technician/add-technician`))} />
-        <PrivateRoute path={`${APP_PREFIX_PATH}/super-admin/succursale/list-succursale`} component={SuccursaleList} />
+        <PrivateRoute path={`${APP_PREFIX_PATH}/super-admin/succursale`} component={SuccursaleList} />
         <PrivateRoute path={`${APP_PREFIX_PATH}/super-admin/succursale/add-succursale`} component={lazy(() => import(`./super-admin/succursale/add-succursale`))} />
         <PrivateRoute path={`${APP_PREFIX_PATH}/home`} component={lazy(() => import(`./home`))} />
         <Redirect from={`${APP_PREFIX_PATH}`} to={`${APP_PREFIX_PATH}/home`} />
