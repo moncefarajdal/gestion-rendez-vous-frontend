@@ -1,12 +1,13 @@
 import { Route, Redirect } from 'react-router-dom'
 
-const PrivateRoute = ({ children, ...rest }) => {
+const PrivateClientRoute = ({ children, ...rest }) => {
     let token = localStorage.getItem('token')
-    let role = localStorage.getItem('role')
-    let auth = { 'token': true }
-    if (token == null) {
+    let role = localStorage.getItem('role').toLowerCase().substring(1, localStorage.getItem('role').toLowerCase().length-1);
+    let auth = { 'token': true, 'role': role }
+    if (token == null && role != 'client') {
         auth.token = false
     }
+    console.log(role)
     return (
         <Route {...rest}>
             {!auth.token
@@ -18,4 +19,4 @@ const PrivateRoute = ({ children, ...rest }) => {
     )
 }
 
-export default PrivateRoute
+export default PrivateClientRoute

@@ -18,12 +18,15 @@ class AuthService {
             .then(response => {
                 if (response.headers['authorization']) {
                     localStorage.setItem('token', JSON.stringify(response.headers['authorization']))
+                    this.decode()
+                    // localStorage.setItem('role', )
                 }
             });
     }
 
     logout() {
         localStorage.removeItem('token');
+        localStorage.removeItem('role');
     }
 
     register(username, email, password) {
@@ -34,13 +37,33 @@ class AuthService {
         });
     }
 
+    registerClient(username, email, password, cin) {
+        return axios.post(API_URL + "api/v1/client/", {
+            username,
+            email,
+            password,
+            cin
+        });
+    }
+
     getCurrentUser() {
         return JSON.parse(localStorage.getItem('user'));;
     }
 
-    decode() {
-        // const helper = new JwtHelperService()
-        // return helper.decodeToken(localStorage.getItem('token'));
+    decode () {
+        let token = localStorage.getItem('token')
+        var base64Url = token.split('.')[1];
+        var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+        var jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function(c) {
+            return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+        }).join(''));
+        var parsedToken = JSON.parse(jsonPayload)
+        var role = parsedToken['roles']
+        localStorage.setItem('role', parsedToken['roles'].toString())
+        // console.log(parsedToken['roles'])
+        console.log(role)
+    
+        return JSON.parse(jsonPayload);
     }
 
     // loadInfos() {
