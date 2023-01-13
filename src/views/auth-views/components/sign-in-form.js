@@ -62,7 +62,7 @@ export const LoginForm = (props) => {
 		AuthService.login(username, password).then(
 			() => {
 				history.push(`/app/home`)
-				console.log("Success")
+				console.log(AuthService.decode()['roles'])
 			},
 			error => {
 				const resMessage =
