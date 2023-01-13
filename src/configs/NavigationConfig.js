@@ -37,6 +37,7 @@ const dashBoardNavTree = [
             breadcrumb: true,
             submenu: []
           },
+
         ]
       }
     ]
@@ -53,72 +54,57 @@ const dashBoardNavTree = [
 
 const appsNavTree = [
   {
-  key: 'apps',
-  path: '',
-  title: 'sidenav.apps',
-  icon: AppstoreOutlined,
-  breadcrumb: false,
-  submenu: [
-    {
-      key: 'apps-technician',
-      path: `${APP_PREFIX_PATH}/admin/technician`,
-      title: 'Techniciens',
-      icon: BulbOutlined,
-      breadcrumb: true,
-      submenu: [
-        {
-          key: 'apps-technicians-list',
-          path: `${APP_PREFIX_PATH}/admin/technician/list-technician`,
-          title: 'Techniciens List',
-          icon: '',
-          breadcrumb: false,
-          submenu: []
-        },
-        {
-          key: 'add',
-          path: `${APP_PREFIX_PATH}/admin/technician/add-technician`,
-          title: 'Add Technicien',
-          icon: '',
-          breadcrumb: false,
-          submenu: []
-        }
-      ]
-    },
-    {
-      key: 'apps-succursales',
-      path: `${APP_PREFIX_PATH}/admin/succursale`,
-      title: 'Succursale',
-      icon: BulbOutlined,
-      breadcrumb: true,
-      submenu: [
-        {
-          key: 'apps-succursales-list',
-          path: `${APP_PREFIX_PATH}/admin/succursale/list-succursale`,
-          title: 'Succursales List',
-          icon: '',
-          breadcrumb: false,
-          submenu: []
-        },
-        {
-          key: 'apps-succursales-add',
-          path: `${APP_PREFIX_PATH}/admin/succursale/add-succursale`,
-          title: 'Add a Succursale',
-          icon: '',
-          breadcrumb: false,
-          submenu: []
-        },
-        {
-          key: 'apps-succursales-edit',
-          path: `${APP_PREFIX_PATH}/admin/succursale/edit-succursale`,
-          title: 'Edit a Succursale',
-          icon: '',
-          breadcrumb: false,
-          submenu: []
-        }
-      ]
-    }
-  ]
-}]
+    key: 'apps',
+    path: '',
+    title: 'sidenav.apps',
+    icon: AppstoreOutlined,
+    breadcrumb: false,
+    submenu: [
+      {
+        key: 'apps-technician',
+        path: `${APP_PREFIX_PATH}/admin/technician`,
+        title: 'Techniciens',
+        icon: BulbOutlined,
+        breadcrumb: true,
+        submenu: [
+          {
+            key: 'apps-technicians-list',
+            path: `${APP_PREFIX_PATH}/admin/technician/list-technician`,
+            title: 'Techniciens List',
+            icon: '',
+            breadcrumb: false,
+            submenu: []
+          },
+          {
+            key: 'add',
+            path: `${APP_PREFIX_PATH}/admin/technician/add-technician`,
+            title: 'Add Technicien',
+            icon: '',
+            breadcrumb: false,
+            submenu: []
+          }
+        ]
+      },
+      {
+        key: 'apps-succursale',
+        path: `${APP_PREFIX_PATH}/super-admin/succursale`,
+        title: 'Succursales',
+        icon: BulbOutlined,
+        breadcrumb: true,
+        submenu: [
+          {
+            key: 'apps-succursales-list',
+            path: `${APP_PREFIX_PATH}/super-admin/succursale/list-succursale`,
+            title: 'Succursales List',
+            icon: '',
+            breadcrumb: false,
+            submenu: []
+          }
+        ]
+      }
+    ]
+  },
+]
 
 // const technicianApps = [{
 //   key: 'technician',
