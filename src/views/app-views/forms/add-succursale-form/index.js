@@ -19,15 +19,7 @@ const getBase64 = (img, callback) => {
 const ADD = 'ADD'
 const EDIT = 'EDIT'
 
-function saveSuccursale(adresse,nom,service,societe){
-	return axios.post("http://localhost:8090/api/v1/succursale/",{
-	   adresse,
-	   nom,
-	   service,
-	   societe
-	});
 
-}
 
 
 const ProductForm = props => {
@@ -78,20 +70,19 @@ const ProductForm = props => {
 	};
 	
 	
-	const handleClick =(e)=>{
+	const handleClick=(e)=>{
 		e.preventDefault()
-		axios.post("http://localhost:8090/api/v1/succursale/",{adresse,nom,service,societe}, {
-			headers: {
-			  Accept: "application/json",
-			  "Content-Type": "application/json;charset=UTF-8",
-			},
-		  }).then(()=>{
-			console.log("success")
-		});
-
-
-
-	};
+		const succursale={adresse,nom,service,societe}
+		console.log(succursale)
+		fetch("http://localhost:8090/api/v1/succursale/",{
+		  method:"POST",
+		  headers:{"Content-Type":"application/json"},
+		  body:JSON.stringify(succursale)
+	
+	  }).then(()=>{
+		console.log("New Student added")
+	  })
+	}
 
 	const onFinish = () => {
 		setSubmitLoading(true)
@@ -110,6 +101,15 @@ const ProductForm = props => {
 			console.log('info', info)
 			message.error('Please enter all required field ');
 		});
+	};
+	function saveSuccursale(adresse,nom,service,societe){
+		return axios.post("http://localhost:8090/api/v1/succursale/",{
+		   adresse,
+		   nom,
+		   service,
+		   societe
+		});
+	
 	};
 	function handleSave(){
 		saveSuccursale(service,nom,adresse,societe).then(response=>{
@@ -137,9 +137,7 @@ const ProductForm = props => {
 							<h2 className="mb-3">{mode === 'ADD'? 'Add New Succursale' : `Edit Product`} </h2>
 							<div className="mb-3">
 								<Button className="mr-2">Discard</Button>
-								<Button type="primary" onClick={()=>handleSave(function handleSave(){
-	saveSuccursale(adresse,)
-})} htmlType="submit" >
+								<Button type="primary" onClick={handleClick} htmlType="submit" >
 								{mode === 'ADD'? 'Add' : `Save`}
 								</Button>
 							</div>
@@ -153,16 +151,16 @@ const ProductForm = props => {
 		<Col xs={24} sm={24} md={17}>
 			<Card title="Basic Info">
 				<Form.Item name="nom" label="Name" >
-					<Input placeholder="Succursale Name" onChange={(e)=>setName(e.target.value)}/>
+					<Input placeholder="Succursale Name" onChange={event=>setName(event.target.value)}/>
 				</Form.Item>
 				<Form.Item name="service" label="Service" >
-					<Input placeholder="Succursale Service" onChange={(e)=>setService(e.target.value)}/>
+					<Input placeholder="Succursale Service" onChange={event=>setService(event.target.value)}/>
 				</Form.Item>
 				<Form.Item name="adresse" label="Adress" >
-					<Input placeholder="Succursale Adress" onChange={(e)=>setAdress(e.target.value)}/>
+					<Input placeholder="Succursale Adress" onChange={event=>setAdress(event.target.value)}/>
 				</Form.Item>
 				<Form.Item name="societe" label="Societe" >
-					<Input placeholder="Succursale Adress" onChange={(e)=>setSociete(e.target.value)} />
+					<Input placeholder="Succursale Adress" onChange={event=>setSociete(event.target.value)} />
 				</Form.Item>
 				
 			</Card>
