@@ -6,6 +6,7 @@ import PrivateRoute from '../../services/PrivateRoute'
 import PrivateClientRoute from "services/PrivateClientRoute";
 import TechnicianList from "./admin/technician/list-technician/list-technician";
 import SuccursaleList from "./super-admin/succursale/list-succursale/list-succursale";
+import AdminList from "./super-admin/admin/list-admin";
 const ClientList = lazy(() => import('./client/client-list'))
 // const TechnicianList = lazy(() => import('./admin/technician/list-technician'))
 
@@ -20,6 +21,8 @@ export const AppViews = () => {
         <PrivateRoute path={`${APP_PREFIX_PATH}/admin/technician/add-technician`} component={lazy(() => import(`./admin/technician/add-technician`))} />
         <PrivateRoute path={`${APP_PREFIX_PATH}/super-admin/succursale/list-succursale`} component={SuccursaleList} />
         <PrivateRoute path={`${APP_PREFIX_PATH}/super-admin/succursale/add-succursale`} component={lazy(() => import(`./super-admin/succursale/add-succursale`))} />
+        <PrivateRoute path={`${APP_PREFIX_PATH}/super-admin/admin/list-admin`} component={AdminList}/>
+        <PrivateRoute path={`${APP_PREFIX_PATH}/super-admin/admin/add-admin`} component={lazy(()=> import(`./super-admin/admin/add-admin`))}/>
         {/* <PrivateRoute path={`${APP_PREFIX_PATH}/home`} component={lazy(() => import(`./home`))} /> */}
         <PrivateClientRoute path={`${APP_PREFIX_PATH}/home`} component={lazy(() => import(`./home`))} />
         <Redirect from={`${APP_PREFIX_PATH}`} to={`${APP_PREFIX_PATH}/home`} />

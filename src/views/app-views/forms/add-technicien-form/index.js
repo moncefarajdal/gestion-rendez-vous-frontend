@@ -60,6 +60,8 @@ const ProductForm = props => {
 	const [nom, setNom] = useState('')
 	const [prenom, setPrenom] = useState('')
 	const[reference, setReference]=useState('')
+	const[codePostal,setCodePostal]=useState('')
+	const[type,SetType]=useState('technicien')
 	const[SuccursaleList,setSuccursaleList]=useState([{'nom':'','id':''}])
 	const[succursaleName,setSuccursaleName]=useState('')
 	const [uploadedImg, setImage] = useState('')
@@ -130,7 +132,7 @@ const ProductForm = props => {
 
 	// };
 	const saveTechnician= () => {
-		TechnicianService.saveTechnician({email,nom,prenom,reference,username,password }).then((response) => {
+		TechnicianService.saveTechnician({email,nom,prenom,reference,username,password,codePostal,type }).then((response) => {
 			console.log(response);
 			message.success(`Technician saved`);
 		}).catch(error => {
@@ -200,9 +202,13 @@ const ProductForm = props => {
 				<Form.Item name="nom" label="LastName" >
 					<Input placeholder="Technician LastName" onChange={(e) => setNom(e.target.value)}/>
 				</Form.Item>
+				<Form.Item name="codePostal" label="ZIP" >
+					<Input placeholder="ZIP Code" onChange={(e) => setCodePostal(e.target.value)}/>
+				</Form.Item>
 				<Form.Item name="Reference" label="Reference" >
 					<Input.TextArea rows={4} onChange={(e) => setReference(e.target.value)}/>
 				</Form.Item>
+
 			</Card>
 			<Card title="Login Credentials">
 				<Row gutter={16}>
@@ -218,7 +224,12 @@ const ProductForm = props => {
 
 						</Form.Item>
 					</Col>
-					
+					<Col xs={24} sm={24} md={12}>
+						<Form.Item name="username" label="Username" >
+						<Input placeholder="Technician Username" onChange={(e) => setUserName(e.target.value)} />
+
+						</Form.Item>
+					</Col>
 				</Row>
 			</Card>
 		</Col>

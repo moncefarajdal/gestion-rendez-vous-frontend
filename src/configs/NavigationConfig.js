@@ -93,6 +93,23 @@ const appsNavTree = [
             submenu: []
           }
         ]
+      },
+      {
+        key: 'apps-admin',
+        path: `${APP_PREFIX_PATH}/super-admin/admin`,
+        title: 'Admins',
+        icon: BulbOutlined,
+        breadcrumb: true,
+        submenu: [
+          {
+            key: 'apps-admins-list',
+            path: `${APP_PREFIX_PATH}/super-admin/admin/list-admin`,
+            title: 'Admins List',
+            icon: '',
+            breadcrumb: false,
+            submenu: []
+          }
+        ]
       }
     ]
   },
