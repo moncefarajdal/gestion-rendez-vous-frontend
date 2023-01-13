@@ -16,10 +16,9 @@ class AuthService {
                 password
             })
             .then(response => {
-                if (response.headers.get('Authorization')) {
-                    localStorage.setItem('token', JSON.stringify(response.headers.get('Authorization')))
+                if (response.headers['authorization']) {
+                    localStorage.setItem('token', JSON.stringify(response.headers['authorization']))
                 }
-                console.log(response.headers.get('Authorization'))
             });
     }
 
