@@ -13,7 +13,7 @@ export const AppViews = () => {
   return (
     <Suspense fallback={<Loading cover="content"/>}>
       <Switch>
-        <PrivateRoute path={`${APP_PREFIX_PATH}/technician`} component={lazy(() => import(`./technician/calendar`))} />
+        <PrivateRoute path={`${APP_PREFIX_PATH}/technician`} component={lazy(() => import(`./technician/calendrier`))} />
         <PrivateRoute path={`${APP_PREFIX_PATH}/client`} component={ClientList} />
         <PrivateRoute path={`${APP_PREFIX_PATH}/technicien/client/add-client`} component={lazy(() => import(`./utils/add/add-client`))}  />
         <PrivateRoute path={`${APP_PREFIX_PATH}/admin/technician/list-technician`} component={TechnicianList} />

@@ -34,16 +34,10 @@ const rules = {
 	]
 }
 
-
-
-
-
-
-
 const GeneralField = props => (
 	<Row gutter={16}>
 		<Col xs={24} sm={24} md={17}>
-			<Card title="Basic Info">
+			<Card title="Succursale Info">
 				<Form.Item name="nom" label="Name" rules={rules.name}>
 					<Input placeholder="Succursale Name" />
 				</Form.Item>
@@ -56,11 +50,24 @@ const GeneralField = props => (
 				<Form.Item name="societe" label="Societe" rules={rules.name}>
 					<Input placeholder="Succursale Adress" />
 				</Form.Item>
-				
 			</Card>
-			
+			<Card title="Admin">
+				<Form.Item name="email" label="Email">
+					<Input placeholder="Admin Email" />
+				</Form.Item>
+				<Form.Item name="username" label="Username">
+					<Input placeholder="Username" />
+				</Form.Item>
+			</Card>
+			<Card title="Organization">
+				<Form.Item name="service" label="Service">
+					<Input placeholder="Service" />
+				</Form.Item>
+				<Form.Item name="reference" label="Reference">
+					<Input placeholder="Reference" />
+				</Form.Item>
+			</Card>
 		</Col>
-		
 	</Row>
 )
 
