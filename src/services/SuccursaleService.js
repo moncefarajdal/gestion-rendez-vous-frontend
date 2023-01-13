@@ -8,4 +8,4 @@ class SuccursaleService {
     }
 }
 
-export default SuccursaleService
+export default new SuccursaleService
