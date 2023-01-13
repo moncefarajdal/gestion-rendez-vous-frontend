@@ -100,17 +100,7 @@ const ProductForm = props => {
     }
 
 
-    const saveBtn = (e) => {
-        e.preventDefault();
-        console.log('username',username);
-		console.log('nom',nom);
-		console.log('prenom',prenom);
-        console.log('succursale',succursaleName);
-        console.log('email',email);
-		console.log('password',password);
-		console.log('reference',reference);
-
-    }
+    
 	const handleUploadChange = info => {
 		if (info.file.status === 'uploading') {
 			setUploadLoading(true)
@@ -139,6 +129,15 @@ const ProductForm = props => {
 
 
 	// };
+	const saveTechnician= () => {
+		TechnicianService.saveTechnician({email,nom,prenom,reference,username,password }).then((response) => {
+			console.log(response);
+			message.success(`Technician saved`);
+		}).catch(error => {
+			console.log(error)
+		})
+	}
+
 
 	
 	
@@ -182,7 +181,7 @@ const ProductForm = props => {
 							<h2 className="mb-3">{mode === 'ADD' ? 'Add Technician' : `Edit Product`} </h2>
 							<div className="mb-3">
 								<Button className="mr-2">Discard</Button>
-								<Button type="primary"  htmlType="submit" onClick={saveBtn}>
+								<Button type="primary"  htmlType="submit" onClick={() => saveTechnician()}>
 									{mode === 'ADD' ? 'Add' : `Save`}
 								</Button>
 							</div>
@@ -223,46 +222,7 @@ const ProductForm = props => {
 				</Row>
 			</Card>
 		</Col>
-		<Col xs={24} sm={24} md={7}>
-			<Card title="Media">
-				<Dragger {...imageUploadProps} beforeUpload={beforeUpload} onChange={e=> props.handleUploadChange(e)}>
-					{
-						props.uploadedImg ? 
-						<img src={props.uploadedImg} alt="avatar" className="img-fluid" /> 
-						: 
-						<div>
-							{
-								props.uploadLoading ? 
-								<div>
-									<LoadingOutlined className="font-size-xxl text-primary"/>
-									<div className="mt-3">Uploading</div>
-								</div> 
-								: 
-								<div>
-									<CustomIcon className="display-3" svg={ImageSvg}/>
-									<p>Click or drag file to upload</p>
-								</div>
-							}
-						</div>
-					}
-				</Dragger>
-			</Card>
-			<Card title="Organization">
-				<Form.Item name="category" label="Category" >
-					<Select className="w-100" placeholder="Category" value={succursaleName} onChange={handleChange}>
-					<option value="">Choose Company Name</option>
-
-                     {SuccursaleList.map(succursale => (
-	                <option value={succursale.nom} key={succursale.id} >{succursale.nom}</option>
-
-	            ))
-	              }
-					</Select>
-				</Form.Item>
-				
-			</Card>
-			
-		</Col>
+	
 	</Row>
 						</TabPane>
 
