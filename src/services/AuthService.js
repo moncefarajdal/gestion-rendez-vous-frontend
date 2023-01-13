@@ -34,6 +34,15 @@ class AuthService {
         });
     }
 
+    registerClient(username, email, password, cin) {
+        return axios.post(API_URL + "api/v1/client/", {
+            username,
+            email,
+            password,
+            cin
+        });
+    }
+
     getCurrentUser() {
         return JSON.parse(localStorage.getItem('user'));;
     }

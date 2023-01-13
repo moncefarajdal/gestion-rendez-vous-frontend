@@ -8,6 +8,7 @@ import axios from 'axios'
 import SuccursaleService from 'services/SuccursaleService'
 import save from 'save'
 import service from 'auth/FetchInterceptor'
+import { useHistory } from 'react-router-dom'
 
 const { TabPane } = Tabs;
 
@@ -20,19 +21,9 @@ const getBase64 = (img, callback) => {
 const ADD = 'ADD'
 const EDIT = 'EDIT'
 
-function saveSuccursale(adresse, nom, service, societe) {
-	return axios.post("http://localhost:8090/api/v1/succursale/", {
-		adresse,
-		nom,
-		service,
-		societe
-	});
-
-}
-
-
 const ProductForm = props => {
 
+	let history = useHistory()
 	const { mode = ADD, param } = props
 
 	const [form] = Form.useForm();
@@ -78,30 +69,17 @@ const ProductForm = props => {
 		}
 	};
 
-
-	// const handleClick =(e)=>{
-	// 	e.preventDefault()
-	// 	axios.post("http://localhost:8090/api/v1/succursale/",{adresse,nom,service,societe}, {
-	// 		headers: {
-	// 		  Accept: "application/json",
-	// 		  "Content-Type": "application/json;charset=UTF-8",
-	// 		},
-	// 	  }).then(()=>{
-	// 		console.log("success")
-	// 	});
-
-
-
-	// };
-
 	const saveSuccursale = () => {
 		SuccursaleService.saveSuccursale({ adresse, nom }).then((response) => {
 			console.log(response);
+			message.success(`Succursale saved`);
 		}).catch(error => {
 			console.log(error)
 		})
-		// axios.post("http://localhost:8090/api/v1/succursale/", { adresse, nom }).then(response => console.log(response))
-		// console.log({ adresse, nom })
+	}
+
+	const headBack = () => {
+		history.push(`/app/super-admin/succursale/list-succursale`)
 	}
 
 	const onFinish = () => {
@@ -147,7 +125,7 @@ const ProductForm = props => {
 						<Flex className="py-2" mobileFlex={false} justifyContent="between" alignItems="center">
 							<h2 className="mb-3">{mode === 'ADD' ? 'Add New Succursale' : `Edit Product`} </h2>
 							<div className="mb-3">
-								<Button className="mr-2">Discard</Button>
+								<Button className="mr-2" onClick={() => headBack()}>Discard</Button>
 								<Button type="primary" onClick={() => saveSuccursale()} htmlType="submit" >
 									{mode === 'ADD' ? 'Add' : `Save`}
 								</Button>
