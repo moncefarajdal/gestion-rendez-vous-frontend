@@ -1,13 +1,11 @@
 import React from 'react';
-// import ProductForm from '../ProductForm';
+import ProductForm from '../../../forms/add-technicien-form';
 
-const AddTechnician = () => {
+const addTechnician = () => {
 	return (
-		// <ProductForm mode="ADD"/>
-        <div>
-			Add technician component works!
-		</div>
+		 <ProductForm mode="ADD"/>
+        
 	)
 }
 
-export default AddTechnician
+export default addTechnician

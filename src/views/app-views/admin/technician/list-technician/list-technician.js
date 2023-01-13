@@ -58,9 +58,9 @@ const TechnicienList = () => {
 	);
 	
 	const addTechnician = () => {
-		history.push(`/app/admin/technicien/add-technicien`)
+		history.push(`/app/admin/technician/add-technician`)
 	}
-	
+
 	const viewDetails = row => {
 		history.push(`/app/apps/ecommerce/edit-product/${row.id}`)
 	}

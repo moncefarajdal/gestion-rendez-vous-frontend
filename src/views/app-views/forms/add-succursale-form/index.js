@@ -27,6 +27,7 @@ function saveSuccursale(adresse, nom, service, societe) {
 		service,
 		societe
 	});
+}
 
 
 
