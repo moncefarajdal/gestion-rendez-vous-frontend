@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import { Card, Table, Select, Input, Button, Badge, Menu } from 'antd';
 import ProductListData from "assets/data/product-list.data.json"
 import { EyeOutlined, DeleteOutlined, SearchOutlined, PlusCircleOutlined } from '@ant-design/icons';
@@ -10,6 +10,8 @@ import { useHistory } from "react-router-dom";
 import utils from 'utils';
 import { useNavigate } from "react-router-dom";
 import TachnicianData from './TachnicianData';
+import axios from 'axios';
+import { result } from 'lodash';
 
 const { Option } = Select
 
@@ -83,23 +85,28 @@ const TechnicienList = () => {
 	const tableColumns = [
 		{
 			title: 'ID',
-			dataIndex: 'id'
+			dataIndex: 'id',
+			key: 'id'
 		},
 		{
 			title: 'First Name',
-			dataIndex: 'firstName'
+			dataIndex: 'prenom',
+			key:'prenom'
 		},
 		{
 			title: 'Last Name',
-			dataIndex: 'lastName'
+			dataIndex: 'nom',
+			key:'nom'
 		},
 		{
 			title: 'Email',
-			dataIndex: 'email'
+			dataIndex: 'email',
+			key:'email'
 		},
 		{
 			title: 'Succursale',
-			dataIndex: 'succursale'
+			dataIndex: 'succursale',
+			key:'succursale'
 		},
 		// {
 		// 	title: 'Product',
@@ -144,15 +151,14 @@ const TechnicienList = () => {
 		// 	),
 		// 	sorter: (a, b) => utils.antdTableSorter(a, b, 'stock')
 		// },
-		{
-			title: 'Actions',
-			dataIndex: 'Actions',
-			render: (_, elm) => (
-				<div className="text-right">
-					<EllipsisDropdown menu={dropdownMenu(elm)}/>
-				</div>
-			)
-		}
+		{ 
+			title: 'Action',
+			dataIndex: '',
+			render: (text, technicien) => (
+			  <Button onClick={() => handleDelete(technicien.reference)}>Delete</Button>
+			),
+		  },
+		
 	];
 	
 	const rowSelection = {
@@ -179,7 +185,29 @@ const TechnicienList = () => {
 			setList(ProductListData)
 		}
 	}
-
+	const [techniciens ,setTechniciens]=useState([])
+	useEffect(()=>{
+          loadTechnician();
+	},[]);
+	const loadTechnician=async()=>{
+		const result =await axios.get("http://localhost:8090/api/v1/technicien/")
+		setTechniciens(result.data.map(row=>({id:row.id,prenom:row.prenom,nom:row.nom,email:row.email})))
+		console.log(result.data);
+	}
+	
+	function handleDelete(reference) {
+		// Make a DELETE request to the API endpoint for deleting the data
+		axios.delete(`http://localhost:8090/api/v1/technicien/reference/${reference}`)
+		  .then(response => {
+			console.log(response);
+			// If the request is successful, update the state to remove the deleted item
+			// and re-render the table
+			setTechniciens(techniciens.filter(item => item.reference !== reference));
+		  })
+		  .catch(error => {
+			console.log(error);
+		  });
+	  }
 	return (
 		<Card>
 			<Flex alignItems="center" justifyContent="between" mobileFlex={false}>
@@ -212,7 +240,7 @@ const TechnicienList = () => {
 			<div className="table-responsive">
 				<Table 
 					columns={tableColumns} 
-					// dataSource={list} 
+					dataSource={techniciens} 
 					rowKey='id' 
 					rowSelection={{
 						selectedRowKeys: selectedRowKeys,
