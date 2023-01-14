@@ -112,7 +112,7 @@ const SuccursaleList = () => {
 			title: 'Action',
 			dataIndex: '',
 			render: (text, succursale) => (
-			  <Button onClick={() => handleDelete(succursale.id)}>Delete</Button>
+			  <Button onClick={() => handleDelete(succursale.nom)}>Delete</Button>
 			),
 		  },
 		
@@ -195,14 +195,14 @@ const SuccursaleList = () => {
 		setSuccursales(result.data.map(row=>({id:row.id,nom:row.nom,adresse:row.adresse,chef:row.chef.username,service:row.service.reference})))
 		console.log(result.data);
 	};
-	function handleDelete(reference) {
+	function handleDelete(nom) {
 		// Make a DELETE request to the API endpoint for deleting the data
-		axios.delete(`http://localhost:8090/api/v1/technicien/reference/${reference}`)
+		axios.delete(`http://localhost:8090/api/v1/succursale/nom/${nom}`)
 		  .then(response => {
 			console.log(response);
 			// If the request is successful, update the state to remove the deleted item
 			// and re-render the table
-			setSuccursales(succursales.filter(item => item.reference !== reference));
+			setSuccursales(succursales.filter(item => item.nom !== nom));
 		  })
 		  .catch(error => {
 			console.log(error);
