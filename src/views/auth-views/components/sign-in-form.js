@@ -15,6 +15,8 @@ import JwtAuthService from 'services/JwtAuthService'
 import { useHistory, useLocation } from "react-router-dom";
 import { motion } from "framer-motion"
 import AuthService from 'services/AuthService';
+import SuccursaleService from 'services/SuccursaleService';
+import axios from 'axios';
 
 export const LoginForm = (props) => {
 	let history = useHistory();
@@ -58,34 +60,32 @@ export const LoginForm = (props) => {
 	const [username, setUsername] = useState("")
 	const [password, setPassword] = useState("")
 
-	function handleLogin(e) {
+	function handleLogin() {
 		AuthService.login(username, password).then(
 			() => {
 				history.push(`/app/home`)
-				console.log(AuthService.decode()['roles'])
 			},
 			error => {
-				const resMessage =
-					(error.response &&
-						error.response.data &&
-						error.response.data.message) ||
-					error.message ||
-					error.toString();
-				console.log(resMessage)
+				// const resMessage =
+				// 	(error.response &&
+				// 		error.response.data &&
+				// 		error.response.data.message) ||
+				// 	error.message ||
+				// 	error.toString();
+				// console.log(resMessage)
+				console.log(error)
 			}
 		);
+		SuccursaleService.getNomByChef(username).then(
+			(response) => {
+				localStorage.setItem('succursale', response.data)
+				console.log(response.data)
+			},
+			error => console.log(error)
+		)
 	};
 
-	useEffect(() => {
-		if (token !== null && allowRedirect) {
-			history.push(redirect)
-		}
-		if (showMessage) {
-			setTimeout(() => {
-				hideAuthMessage();
-			}, 3000);
-		}
-	});
+	console.log(username)
 
 	const renderOtherSignIn = (
 		<div>

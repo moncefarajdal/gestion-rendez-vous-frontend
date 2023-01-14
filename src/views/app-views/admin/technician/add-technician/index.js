@@ -3,8 +3,7 @@ import ProductForm from '../../../forms/add-technicien-form';
 
 const addTechnician = () => {
 	return (
-		 <ProductForm mode="ADD"/>
-        
+		<ProductForm mode="ADD" />
 	)
 }
 

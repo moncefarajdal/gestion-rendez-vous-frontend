@@ -118,7 +118,6 @@ const appsNavTree = [
 const navigationConfig = [
   ...dashBoardNavTree,
   ...appsNavTree,
-  // ...technicianApps
 ]
 
 export default navigationConfig;

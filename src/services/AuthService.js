@@ -1,12 +1,7 @@
 import axios from "axios";
-import { useState } from "react";
-import User from "../models/User"
 
 // const API_URL = "http://localhost:8090/api/v1/";
 const API_URL = "http://localhost:8090/";
-// const [authenticatedUser, setAuthenticatedUser] = useState("")
-// const authenticatedUser = new User()
-// const [authenticated, setAuthenticated] = useState("")
 
 class AuthService {
     login(username, password) {
@@ -16,17 +11,18 @@ class AuthService {
                 password
             })
             .then(response => {
+                // console.log(response.headers['authorization'])
                 if (response.headers['authorization']) {
                     localStorage.setItem('token', JSON.stringify(response.headers['authorization']))
                     this.decode()
-                    // localStorage.setItem('role', )
                 }
             });
     }
 
     logout() {
-        localStorage.removeItem('token');
-        localStorage.removeItem('role');
+        // localStorage.removeItem('token');
+        // localStorage.removeItem('role');
+        localStorage.clear();
     }
 
     register(username, email, password) {
@@ -50,7 +46,7 @@ class AuthService {
         return JSON.parse(localStorage.getItem('user'));;
     }
 
-    decode () {
+    decode() {
         let token = localStorage.getItem('token')
         var base64Url = token.split('.')[1];
         var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
@@ -58,30 +54,11 @@ class AuthService {
             return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
         }).join(''));
         var parsedToken = JSON.parse(jsonPayload)
-        var role = parsedToken['roles']
-        localStorage.setItem('role', parsedToken['roles'].toString())
-        // console.log(parsedToken['roles'])
-        console.log(role)
-    
+        console.log(jsonPayload)
+        var role = parsedToken['sub'].toString()
+        localStorage.setItem('role', role)
         return JSON.parse(jsonPayload);
     }
-
-    // loadInfos() {
-    //     const tokenDecoded = decode();
-    //     const username = tokenDecoded.sub;
-    //     const roles = tokenDecoded.roles;
-    //     const email = tokenDecoded.email;
-    //     const prenom = tokenDecoded.prenom;
-    //     const nom = tokenDecoded.nom;
-    //     this.authenticatedUser.username = username;
-    //     this.authenticatedUser.nom = nom;
-    //     this.authenticatedUser.prenom = prenom;
-    //     this.authenticatedUser.email = email;
-    //     this.authenticatedUser.roles = roles;
-    //     console.log(this.authenticatedUser.roles);
-    //     localStorage.setItem('token', tokenDecoded);
-    //     setAuthenticated = true
-    // }
 }
 
 export default new AuthService();

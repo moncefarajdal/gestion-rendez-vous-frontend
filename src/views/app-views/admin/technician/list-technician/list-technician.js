@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, { useState, useEffect } from 'react'
 import { Card, Table, Select, Input, Button, Badge, Menu } from 'antd';
 import ProductListData from "assets/data/product-list.data.json"
 import { EyeOutlined, DeleteOutlined, SearchOutlined, PlusCircleOutlined } from '@ant-design/icons';
@@ -10,17 +10,18 @@ import { useHistory } from "react-router-dom";
 import utils from 'utils';
 import { useNavigate } from "react-router-dom";
 import TachnicianData from './TachnicianData';
+import SuccursaleService from 'services/SuccursaleService';
 
 const { Option } = Select
 
 const getStockStatus = stockCount => {
-	if(stockCount >= 10) {
+	if (stockCount >= 10) {
 		return <><Badge status="success" /><span>In Stock</span></>
 	}
-	if(stockCount < 10 && stockCount > 0) {
+	if (stockCount < 10 && stockCount > 0) {
 		return <><Badge status="warning" /><span>Limited Stock</span></>
 	}
-	if(stockCount === 0) {
+	if (stockCount === 0) {
 		return <><Badge status="error" /><span>Out of Stock</span></>
 	}
 	return null
@@ -33,6 +34,8 @@ const TechnicienList = () => {
 	const [list, setList] = useState(ProductListData)
 	const [selectedRows, setSelectedRows] = useState([])
 	const [selectedRowKeys, setSelectedRowKeys] = useState([])
+
+	
 
 	// let navigate = useNavigate(); 
 	// const routeChange = () =>{ 
@@ -56,7 +59,7 @@ const TechnicienList = () => {
 			</Menu.Item>
 		</Menu>
 	);
-	
+
 	const addTechnician = () => {
 		history.push(`/app/admin/technician/add-technician`)
 	}
@@ -64,11 +67,11 @@ const TechnicienList = () => {
 	const viewDetails = row => {
 		history.push(`/app/apps/ecommerce/edit-product/${row.id}`)
 	}
-	
+
 	const deleteRow = row => {
 		const objKey = 'id'
 		let data = list
-		if(selectedRows.length > 1) {
+		if (selectedRows.length > 1) {
 			selectedRows.forEach(elm => {
 				data = utils.deleteArrayRow(data, objKey, elm.id)
 				setList(data)
@@ -149,12 +152,12 @@ const TechnicienList = () => {
 			dataIndex: 'Actions',
 			render: (_, elm) => (
 				<div className="text-right">
-					<EllipsisDropdown menu={dropdownMenu(elm)}/>
+					<EllipsisDropdown menu={dropdownMenu(elm)} />
 				</div>
 			)
 		}
 	];
-	
+
 	const rowSelection = {
 		onChange: (key, rows) => {
 			setSelectedRows(rows)
@@ -164,14 +167,14 @@ const TechnicienList = () => {
 
 	const onSearch = e => {
 		const value = e.currentTarget.value
-		const searchArray = e.currentTarget.value? list : ProductListData
+		const searchArray = e.currentTarget.value ? list : ProductListData
 		const data = utils.wildCardSearch(searchArray, value)
 		setList(data)
 		setSelectedRowKeys([])
 	}
 
 	const handleShowCategory = value => {
-		if(value !== 'All') {
+		if (value !== 'All') {
 			const key = 'category'
 			const data = utils.filterArray(ProductListData, key, value)
 			setList(data)
@@ -185,14 +188,14 @@ const TechnicienList = () => {
 			<Flex alignItems="center" justifyContent="between" mobileFlex={false}>
 				<Flex className="mb-1" mobileFlex={false}>
 					<div className="mr-md-3 mb-3">
-						<Input placeholder="Search" prefix={<SearchOutlined />} onChange={e => onSearch(e)}/>
+						<Input placeholder="Search" prefix={<SearchOutlined />} onChange={e => onSearch(e)} />
 					</div>
 					<div className="mb-3">
-						<Select 
-							defaultValue="All" 
-							className="w-100" 
-							style={{ minWidth: 180 }} 
-							onChange={handleShowCategory} 
+						<Select
+							defaultValue="All"
+							className="w-100"
+							style={{ minWidth: 180 }}
+							onChange={handleShowCategory}
 							placeholder="Category"
 						>
 							<Option value="All">All</Option>
@@ -210,10 +213,10 @@ const TechnicienList = () => {
 				</div>
 			</Flex>
 			<div className="table-responsive">
-				<Table 
-					columns={tableColumns} 
+				<Table
+					columns={tableColumns}
 					// dataSource={list} 
-					rowKey='id' 
+					rowKey='id'
 					rowSelection={{
 						selectedRowKeys: selectedRowKeys,
 						type: 'checkbox',
