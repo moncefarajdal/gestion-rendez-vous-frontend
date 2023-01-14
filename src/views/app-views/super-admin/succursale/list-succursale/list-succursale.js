@@ -89,24 +89,24 @@ const SuccursaleList = () => {
 			key:'id'
 		},
 		{
-			title: 'First Name',
-			dataIndex: 'prenom',
-			key:'prenom'
-		},
-		{
-			title: 'Last Name',
+			title: 'Name',
 			dataIndex: 'nom',
 			key:'nom'
 		},
 		{
-			title: 'Email',
-			dataIndex: 'email',
-			key:'email'
+			title: 'Adresse',
+			dataIndex: 'adresse',
+			key:'adresse'
 		},
 		{
-			title: 'Username',
-			dataIndex: 'username',
-			key:'username'
+			title: 'Chef',
+			dataIndex: 'chef',
+			key:'chef'
+		},
+		{
+			title: 'Service',
+			dataIndex: 'service',
+			key:'service'
 		},
 		{
 			title: 'Action',
@@ -186,13 +186,13 @@ const SuccursaleList = () => {
 			setList(ProductListData)
 		}
 	}
-	const [admins ,setAdmins]=useState([])
+	const [succursales ,setSuccursales]=useState([])
 	useEffect(()=>{
-          loadAdmin();
+          loadSuccursale();
 	},[]);
-	const loadAdmin=async()=>{
-		const result =await axios.get("http://localhost:8090/api/v1/type/admin")
-		setAdmins(result.data.map(row=>({id:row.id,prenom:row.prenom,nom:row.nom,email:row.email,username:row.username})))
+	const loadSuccursale=async()=>{
+		const result =await axios.get("http://localhost:8090/api/v1/succursale/")
+		setSuccursales(result.data.map(row=>({id:row.id,nom:row.nom,adresse:row.adresse,chef:row.chef.username,service:row.service.reference})))
 		console.log(result.data);
 	};
 	function handleDelete(reference) {
@@ -202,7 +202,7 @@ const SuccursaleList = () => {
 			console.log(response);
 			// If the request is successful, update the state to remove the deleted item
 			// and re-render the table
-			setAdmins(admins.filter(item => item.reference !== reference));
+			setSuccursales(succursales.filter(item => item.reference !== reference));
 		  })
 		  .catch(error => {
 			console.log(error);
@@ -241,7 +241,7 @@ const SuccursaleList = () => {
 			<div className="table-responsive">
 				<Table 
 					columns={tableColumns} 
-					dataSource={list} 
+					dataSource={succursales} 
 					rowKey='id' 
 					rowSelection={{
 						selectedRowKeys: selectedRowKeys,
