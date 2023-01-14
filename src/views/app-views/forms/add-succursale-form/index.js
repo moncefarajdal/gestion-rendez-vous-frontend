@@ -31,6 +31,9 @@ const ProductForm = props => {
 	const [adresse, setAdress] = useState('')
 	const [service, setService] = useState('')
 	const [societe, setSociete] = useState('')
+	const [email, setEmail] = useState('')
+	const [username, setUsername] = useState('')
+	const [reference, setReference] = useState('')
 	const [uploadedImg, setImage] = useState('')
 	const [uploadLoading, setUploadLoading] = useState(false)
 	const [submitLoading, setSubmitLoading] = useState(false)
@@ -69,8 +72,23 @@ const ProductForm = props => {
 		}
 	};
 
+	const succursale = {
+		adresse: adresse,
+		nom: nom,
+		chef: {
+			email: email,
+			username: username,
+			type: 'admin'
+		},
+		service: {
+			service: service,
+			reference: reference
+		}
+	}
+
 	const saveSuccursale = () => {
-		SuccursaleService.saveSuccursale({ adresse, nom }).then((response) => {
+		SuccursaleService.saveSuccursale(succursale)
+		.then((response) => {
 			console.log(response);
 			message.success(`Succursale saved`);
 		}).catch(error => {
@@ -143,7 +161,7 @@ const ProductForm = props => {
 											<Input placeholder="Succursale Name" onChange={(e) => setName(e.target.value)} />
 										</Form.Item>
 										<Form.Item name="service" label="Service" >
-											<Input placeholder="Succursale Service" onChange={(e) => setService(e.target.value)} />
+											<Input placeholder="Succursale Service" />
 										</Form.Item>
 										<Form.Item name="adresse" label="Adress" >
 											<Input placeholder="Succursale Adress" onChange={(e) => setAdress(e.target.value)} />
@@ -151,14 +169,38 @@ const ProductForm = props => {
 										<Form.Item name="societe" label="Societe" >
 											<Input placeholder="Succursale Adress" onChange={(e) => setSociete(e.target.value)} />
 										</Form.Item>
-
 									</Card>
-
 								</Col>
-
 							</Row>
 						</TabPane>
-
+						<TabPane tab="Admin" key="2">
+							<Row gutter={16}>
+								<Col xs={24} sm={24} md={17}>
+									<Card title="Admin">
+										<Form.Item name="email" label="Email">
+											<Input placeholder="Admin Email" onChange={(e) => setEmail(e.target.value)} />
+										</Form.Item>
+										<Form.Item name="username" label="Username">
+											<Input placeholder="Username" onChange={(e) => setUsername(e.target.value)} />
+										</Form.Item>
+									</Card>
+								</Col>
+							</Row>
+						</TabPane>
+						<TabPane tab="Service" key="3">
+							<Row gutter={16}>
+								<Col xs={24} sm={24} md={17}>
+									<Card title="Service">
+										<Form.Item name="service" label="Service Name">
+											<Input placeholder="Service Name" onChange={(e) => setService(e.target.value)} />
+										</Form.Item>
+										<Form.Item name="reference" label="Reference">
+											<Input placeholder="Reference" onChange={(e) => setReference(e.target.value)} />
+										</Form.Item>
+									</Card>
+								</Col>
+							</Row>
+						</TabPane>
 					</Tabs>
 				</div>
 			</Form>
