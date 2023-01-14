@@ -9,7 +9,7 @@ import NumberFormat from 'react-number-format';
 import { useHistory } from "react-router-dom";
 import utils from 'utils';
 import { useNavigate } from "react-router-dom";
-import TachnicianData from './TachnicianData';
+
 
 const { Option } = Select
 
@@ -28,7 +28,7 @@ const getStockStatus = stockCount => {
 
 const categories = ['Cloths', 'Bags', 'Shoes', 'Watches', 'Devices']
 
-const TechnicienList = () => {
+const AdminList = () => {
 	let history = useHistory();
 	const [list, setList] = useState(ProductListData)
 	const [selectedRows, setSelectedRows] = useState([])
@@ -57,10 +57,10 @@ const TechnicienList = () => {
 		</Menu>
 	);
 	
-	const addTechnician = () => {
-		history.push(`/app/admin/technician/add-technician`)
+	const addAdmin = () => {
+		history.push(`/app/super-admin/admin/add-admin`)
 	}
-
+	
 	const viewDetails = row => {
 		history.push(`/app/apps/ecommerce/edit-product/${row.id}`)
 	}
@@ -86,21 +86,35 @@ const TechnicienList = () => {
 			dataIndex: 'id'
 		},
 		{
-			title: 'First Name',
-			dataIndex: 'firstName'
+			title: 'FirstName',
+			dataIndex: 'nom'
+		},
+        {
+			title: 'LastName',
+			dataIndex: 'prenom'
 		},
 		{
-			title: 'Last Name',
-			dataIndex: 'lastName'
+			title: 'Reference',
+			dataIndex: 'reference'
 		},
 		{
-			title: 'Email',
-			dataIndex: 'email'
+			title: 'CIN',
+			dataIndex: 'cin'
+		},
+        {
+			title: 'Username',
+			dataIndex: 'cin'
 		},
 		{
-			title: 'Succursale',
-			dataIndex: 'succursale'
-		},
+			title: 'Actions',
+			dataIndex: 'Actions',
+			render: (_, elm) => (
+				<div className="text-right">
+					<EllipsisDropdown menu={dropdownMenu(elm)}/>
+				</div>
+			)
+		}
+		
 		// {
 		// 	title: 'Product',
 		// 	dataIndex: 'name',
@@ -144,15 +158,7 @@ const TechnicienList = () => {
 		// 	),
 		// 	sorter: (a, b) => utils.antdTableSorter(a, b, 'stock')
 		// },
-		{
-			title: 'Actions',
-			dataIndex: 'Actions',
-			render: (_, elm) => (
-				<div className="text-right">
-					<EllipsisDropdown menu={dropdownMenu(elm)}/>
-				</div>
-			)
-		}
+		
 	];
 	
 	const rowSelection = {
@@ -205,7 +211,7 @@ const TechnicienList = () => {
 					</div>
 				</Flex>
 				<div>
-					<Button onClick={addTechnician} type="primary" icon={<PlusCircleOutlined />} block>Add technician</Button>
+					<Button onClick={addAdmin} type="primary" icon={<PlusCircleOutlined />} block>Add Admin</Button>
 					{/* <Button onClick={routeChange} type="primary" icon={<PlusCircleOutlined />} block>Add technician</Button> */}
 				</div>
 			</Flex>
@@ -226,4 +232,4 @@ const TechnicienList = () => {
 	)
 }
 
-export default TechnicienList
+export default AdminList

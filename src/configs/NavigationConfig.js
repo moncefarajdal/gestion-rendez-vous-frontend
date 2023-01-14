@@ -74,14 +74,6 @@ const appsNavTree = [
             icon: '',
             breadcrumb: false,
             submenu: []
-          },
-          {
-            key: 'add',
-            path: `${APP_PREFIX_PATH}/admin/technician/add-technician`,
-            title: 'Add Technicien',
-            icon: '',
-            breadcrumb: false,
-            submenu: []
           }
         ]
       },
@@ -96,6 +88,23 @@ const appsNavTree = [
             key: 'apps-succursales-list',
             path: `${APP_PREFIX_PATH}/super-admin/succursale/list-succursale`,
             title: 'Succursales List',
+            icon: '',
+            breadcrumb: false,
+            submenu: []
+          }
+        ]
+      },
+      {
+        key: 'apps-admin',
+        path: `${APP_PREFIX_PATH}/super-admin/admin`,
+        title: 'Admins',
+        icon: BulbOutlined,
+        breadcrumb: true,
+        submenu: [
+          {
+            key: 'apps-admins-list',
+            path: `${APP_PREFIX_PATH}/super-admin/admin/list-admin`,
+            title: 'Admins List',
             icon: '',
             breadcrumb: false,
             submenu: []
