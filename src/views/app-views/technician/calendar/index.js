@@ -7,19 +7,19 @@ import { CalendarOutlined, DeleteOutlined } from '@ant-design/icons';
 const { Option } = Select;
 
 const badgeColors = [
-  'pink',
-  'red',
-  'yellow',
-  'orange',
-  'cyan',
-  'green',
-  'blue',
-  'purple',
-  'geekblue',
-  'magenta',
-  'volcano',
-  'gold',
-  'lime',
+	'pink',
+	'red',
+	'yellow',
+	'orange',
+	'cyan',
+	'green',
+	'blue',
+	'purple',
+	'geekblue',
+	'magenta',
+	'volcano',
+	'gold',
+	'lime',
 ];
 
 const initialFormValues = {
@@ -52,7 +52,7 @@ const AgendaList = props => {
 							</div>
 							<div className="calendar-list-item-delete">
 								<Tooltip title="Delete event">
-									<DeleteOutlined onClick={() => onDelete(list.date, i)}/>
+									<DeleteOutlined onClick={() => onDelete(list.date, i)} />
 								</Tooltip>
 							</div>
 						</div>
@@ -70,25 +70,25 @@ const EventModal = ({ visible, addEvent, cancel }) => {
 	}
 
 	useEffect(() => {
-    form.setFieldsValue(initialFormValues);
+		form.setFieldsValue(initialFormValues);
 	});
 
 	return (
 		<Modal
-      title="New Event"
+			title="New Event"
 			visible={visible}
 			footer={null}
 			destroyOnClose={true}
-      onCancel={cancel}
-    >
+			onCancel={cancel}
+		>
 			<Form
-        form={form}
-				
-        layout="vertical" 
+				form={form}
+
+				layout="vertical"
 				name="new-event"
 				preserve={false}
 				onFinish={onSubmit}
-      >
+			>
 				<Form.Item name="title" label="Title">
 					<Input autoComplete="off" />
 				</Form.Item>
@@ -137,7 +137,7 @@ const CalendarApp = () => {
 			<ul className="calendar-event">
 				{listData.map((item, i) => (
 					<li key={`${item.title}-${i}`}>
-						<Badge color={item.bullet} text={item.title}/>
+						<Badge color={item.bullet} text={item.title} />
 					</li>
 				))}
 			</ul>
@@ -147,7 +147,7 @@ const CalendarApp = () => {
 	const getListData = (value) => {
 		let listData = [];
 		calendarList.forEach(elm => {
-			if(elm.date === value) {
+			if (elm.date === value) {
 				listData = elm.event
 			}
 		})
@@ -162,8 +162,8 @@ const CalendarApp = () => {
 
 	const onDeleteEvent = (date, index) => {
 		const data = calendarList.map(calendarList => {
-			if(calendarList.date === date) {
-				calendarList.event = calendarList.event.filter( (_, i) => i !== index)
+			if (calendarList.date === date) {
+				calendarList.event = calendarList.event.filter((_, i) => i !== index)
 			}
 			return calendarList
 		}).filter(elm => elm.event.length !== 0)
@@ -172,7 +172,7 @@ const CalendarApp = () => {
 
 	const onAddEvent = values => {
 		const data = [{
-			title: values.title? values.title : 'Untitled Event',
+			title: values.title ? values.title : 'Untitled Event',
 			bullet: values.bullet,
 			start: values.start.format(('HH:mm A')),
 			end: values.end.format(('HH:mm A')),
@@ -180,15 +180,15 @@ const CalendarApp = () => {
 		const newCalendarArr = calendarList
 		const isExistingDate = newCalendarArr.find(x => x.date === selectedDate)
 		if (isExistingDate) {
-			for (let elm of newCalendarArr) { 
+			for (let elm of newCalendarArr) {
 				if (elm.date === selectedDate) {
 					elm.event = [...elm.event, ...data]
 				}
 			}
 		} else {
-			newCalendarArr.push({date: selectedDate, event: data})
+			newCalendarArr.push({ date: selectedDate, event: data })
 		}
-		const sortedNewCalendarArr  = newCalendarArr.sort((a,b) => moment(a.date) - moment(b.date))
+		const sortedNewCalendarArr = newCalendarArr.sort((a, b) => moment(a.date) - moment(b.date))
 		setModalVisible(false)
 		setCalendarList(sortedNewCalendarArr)
 	}
@@ -202,19 +202,19 @@ const CalendarApp = () => {
 			<Row>
 				<Col xs={24} sm={24} md={9} lg={6}>
 					<h2 className="mb-4">Agenda</h2>
-					<AgendaList 
-						list={calendarList} 
+					<AgendaList
+						list={calendarList}
 						onDelete={onDeleteEvent}
 					/>
 				</Col>
 				<Col xs={24} sm={24} md={15} lg={18}>
-					<Calendar 
-						onSelect={val => onSelect(val)} 
+					<Calendar
+						onSelect={val => onSelect(val)}
 						dateCellRender={cellRender}
 					/>
 				</Col>
 			</Row>
-			<EventModal 
+			<EventModal
 				visible={modalVisible}
 				addEvent={onAddEvent}
 				cancel={onAddEventCancel}

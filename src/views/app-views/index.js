@@ -19,6 +19,7 @@ export const AppViews = () => {
         <PrivateRoute path={`${APP_PREFIX_PATH}/technicien/client/add-client`} component={lazy(() => import(`./utils/add/add-client`))}  />
         <PrivateRoute path={`${APP_PREFIX_PATH}/admin/technician/list-technician`} component={TechnicianList} />
         <PrivateRoute path={`${APP_PREFIX_PATH}/admin/technician/add-technician`} component={lazy(() => import(`./admin/technician/add-technician`))} />
+        <Route path={`${APP_PREFIX_PATH}/admin/technician/add-rdv-disponible`} component={lazy(() => import(`./admin/technician/RdvDispo`))} />
         <PrivateRoute path={`${APP_PREFIX_PATH}/super-admin/succursale/list-succursale`} component={SuccursaleList} />
         <PrivateRoute path={`${APP_PREFIX_PATH}/super-admin/succursale/add-succursale`} component={lazy(() => import(`./super-admin/succursale/add-succursale`))} />
         <PrivateRoute path={`${APP_PREFIX_PATH}/super-admin/admin/list-admin`} component={AdminList}/>
