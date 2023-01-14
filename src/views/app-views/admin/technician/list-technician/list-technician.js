@@ -104,9 +104,9 @@ const TechnicienList = () => {
 			key:'email'
 		},
 		{
-			title: 'Succursale',
-			dataIndex: 'succursale',
-			key:'succursale'
+			title: 'Reference',
+			dataIndex: 'reference',
+			key:'refernce'
 		},
 		// {
 		// 	title: 'Product',
@@ -151,7 +151,7 @@ const TechnicienList = () => {
 		// 	),
 		// 	sorter: (a, b) => utils.antdTableSorter(a, b, 'stock')
 		// },
-		{ 
+		{
 			title: 'Action',
 			dataIndex: '',
 			render: (text, technicien) => (
@@ -191,10 +191,9 @@ const TechnicienList = () => {
 	},[]);
 	const loadTechnician=async()=>{
 		const result =await axios.get("http://localhost:8090/api/v1/technicien/")
-		setTechniciens(result.data.map(row=>({id:row.id,prenom:row.prenom,nom:row.nom,email:row.email})))
+		setTechniciens(result.data.map(row=>({id:row.id,prenom:row.prenom,nom:row.nom,email:row.email,reference:row.reference})))
 		console.log(result.data);
-	}
-	
+	};
 	function handleDelete(reference) {
 		// Make a DELETE request to the API endpoint for deleting the data
 		axios.delete(`http://localhost:8090/api/v1/technicien/reference/${reference}`)
@@ -208,6 +207,8 @@ const TechnicienList = () => {
 			console.log(error);
 		  });
 	  }
+	
+	
 	return (
 		<Card>
 			<Flex alignItems="center" justifyContent="between" mobileFlex={false}>
