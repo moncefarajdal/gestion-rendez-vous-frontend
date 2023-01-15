@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import { Card, Table, Select, Input, Button, Badge, Menu } from 'antd';
 import ProductListData from "assets/data/product-list.data.json"
 import { EyeOutlined, DeleteOutlined, SearchOutlined, PlusCircleOutlined } from '@ant-design/icons';
@@ -9,6 +9,8 @@ import NumberFormat from 'react-number-format';
 import { useHistory } from "react-router-dom";
 import utils from 'utils';
 import { useNavigate } from "react-router-dom";
+import axios from 'axios';
+
 
 
 const { Option } = Select
@@ -84,29 +86,36 @@ const SuccursaleList = () => {
 	const tableColumns = [
 		{
 			title: 'ID',
-			dataIndex: 'id'
+			dataIndex: 'id',
+			key:'id'
 		},
 		{
 			title: 'Name',
-			dataIndex: 'name'
+			dataIndex: 'nom',
+			key:'nom'
 		},
 		{
 			title: 'Adresse',
-			dataIndex: 'adresse'
+			dataIndex: 'adresse',
+			key:'adresse'
+		},
+		{
+			title: 'Chef',
+			dataIndex: 'chef',
+			key:'chef'
 		},
 		{
 			title: 'Service',
-			dataIndex: 'service'
+			dataIndex: 'service',
+			key:'service'
 		},
 		{
-			title: 'Actions',
-			dataIndex: 'Actions',
-			render: (_, elm) => (
-				<div className="text-right">
-					<EllipsisDropdown menu={dropdownMenu(elm)}/>
-				</div>
-			)
-		}
+			title: 'Action',
+			dataIndex: '',
+			render: (text, succursale) => (
+			  <Button onClick={() => handleDelete(succursale.nom)}>Delete</Button>
+			),
+		  },
 		
 		// {
 		// 	title: 'Product',
@@ -178,6 +187,28 @@ const SuccursaleList = () => {
 			setList(ProductListData)
 		}
 	}
+	const [succursales ,setSuccursales]=useState([])
+	useEffect(()=>{
+          loadSuccursale();
+	},[]);
+	const loadSuccursale=async()=>{
+		const result =await axios.get("http://localhost:8090/api/v1/succursale/")
+		setSuccursales(result.data.map(row=>({id:row.id,nom:row.nom,adresse:row.adresse,chef:row.chef.username,service:row.service.reference})))
+		console.log(result.data);
+	};
+	function handleDelete(nom) {
+		// Make a DELETE request to the API endpoint for deleting the data
+		axios.delete(`http://localhost:8090/api/v1/succursale/nom/${nom}`)
+		  .then(response => {
+			console.log(response);
+			// If the request is successful, update the state to remove the deleted item
+			// and re-render the table
+			setSuccursales(succursales.filter(item => item.nom !== nom));
+		  })
+		  .catch(error => {
+			console.log(error);
+		  });
+	  }
 
 	return (
 		<Card>
@@ -211,7 +242,7 @@ const SuccursaleList = () => {
 			<div className="table-responsive">
 				<Table 
 					columns={tableColumns} 
-					// dataSource={list} 
+					dataSource={succursales} 
 					rowKey='id' 
 					rowSelection={{
 						selectedRowKeys: selectedRowKeys,
