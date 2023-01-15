@@ -62,17 +62,6 @@ export const ClientRegisterForm = (props) => {
 		});
 	}
 
-	useEffect(() => {
-		if (token !== null && allowRedirect) {
-			history.push(redirect)
-		}
-		if (showMessage) {
-			setTimeout(() => {
-				hideAuthMessage();
-			}, 3000);
-		}
-	});
-
 	// Login service
 	const [username, setUsername] = useState("")
 	const [email, setEmail] = useState("")
@@ -100,6 +89,9 @@ export const ClientRegisterForm = (props) => {
 					});
 				}
 			);
+		setTimeout(() => {
+			history.push(`/auth/verification`)
+		}, 1000)
 	}
 
 	return (

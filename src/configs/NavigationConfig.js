@@ -74,6 +74,14 @@ const appsNavTree = [
             icon: '',
             breadcrumb: false,
             submenu: []
+          },
+          {
+            key: 'apps-technicians-rdv',
+            path: `${APP_PREFIX_PATH}/admin/technician/add-rdv-disponible`,
+            title: 'RDVs Disponibles',
+            icon: '',
+            breadcrumb: false,
+            submenu: []
           }
         ]
       },
@@ -118,7 +126,6 @@ const appsNavTree = [
 const navigationConfig = [
   ...dashBoardNavTree,
   ...appsNavTree,
-  // ...technicianApps
 ]
 
 export default navigationConfig;

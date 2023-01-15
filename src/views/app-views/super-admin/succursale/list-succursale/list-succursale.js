@@ -30,6 +30,7 @@ const getStockStatus = stockCount => {
 
 const categories = ['Cloths', 'Bags', 'Shoes', 'Watches', 'Devices']
 
+
 const SuccursaleList = () => {
 	let history = useHistory();
 	const [list, setList] = useState(ProductListData)

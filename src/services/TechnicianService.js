@@ -9,6 +9,10 @@ class SuccursaleService {
     saveTechnician(technician) {
         return axios.post(API_URL + 'technicien/', technician)
     }
+
+    getAll() {
+        return axios.get(API_URL + 'technicien/')
+    }
 }
 
 export default new SuccursaleService

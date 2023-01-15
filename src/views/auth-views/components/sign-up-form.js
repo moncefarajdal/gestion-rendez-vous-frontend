@@ -80,7 +80,7 @@ export const RegisterForm = (props) => {
 	function handleRegister() {
 		AuthService.register(username, email, password)
 		.then(response => {
-				console.log("user added successfuly")
+				console.log(response)
 			},
 			error => {
 				const resMessage =
