@@ -63,7 +63,19 @@ export const LoginForm = (props) => {
 	function handleLogin() {
 		AuthService.login(username, password).then(
 			() => {
-				history.push(`/app/home`)
+				// history.push(`/app/home`)
+				if(localStorage.getItem('userRole') == 'SUPER_ADMIN') {
+					history.push(`/app/super-admin/succursale/list-succursale`)
+				} else if (localStorage.getItem('userRole') == 'ADMIN') {
+					history.push(`/app/admin/technician/list-technician`)
+				} else if (localStorage.getItem('userRole') == 'CLIENT') {
+					history.push(`/app/calendar`)
+				} else if (localStorage.getItem('userRole') == 'TECHNICIEN') {
+					history.push(`/app/technician`)
+				} else {
+					history.push(`/app/home`)
+				}
+				window.location.reload();
 			},
 			error => {
 				// const resMessage =

@@ -123,7 +123,7 @@ const RDVForm = props => {
 											{/* <DatePicker selected={date} onChange={(e) => setDate(e)} /> */}
 										</Form.Item>
 										<Form.Item name="technicien" label="Technicien" >
-											<Select className="w-100" placeholder="Category" value={selectedUsername} onChange={handleChange}>
+											<Select className="w-100" placeholder="Technicien" value={selectedUsername} onChange={handleChange}>
 												{listTechniciens.map(t => (//
 													<option value={t.username} key={t.id} >{t.nom} {t.prenom}</option>
 												))

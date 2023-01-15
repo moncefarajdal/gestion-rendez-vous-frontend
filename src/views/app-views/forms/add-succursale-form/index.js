@@ -37,6 +37,8 @@ const ProductForm = props => {
 	const [uploadedImg, setImage] = useState('')
 	const [uploadLoading, setUploadLoading] = useState(false)
 	const [submitLoading, setSubmitLoading] = useState(false)
+	const [prenom, setPrenom] = useState(false)
+	const [lastName, setLastName] = useState(false)
 
 	useEffect(() => {
 		if (mode === EDIT) {
@@ -77,7 +79,9 @@ const ProductForm = props => {
 		nom: nom,
 		chef: {
 			email: email,
-			username: username
+			username: username,
+			nom: lastName,
+			prenom: prenom
 		},
 		service: {
 			reference: reference
@@ -165,14 +169,8 @@ const ProductForm = props => {
 										<Form.Item name="nom" label="Name" >
 											<Input placeholder="Succursale Name" onChange={(e) => setName(e.target.value)} />
 										</Form.Item>
-										<Form.Item name="service" label="Service" >
-											<Input placeholder="Succursale Service" />
-										</Form.Item>
 										<Form.Item name="adresse" label="Adress" >
 											<Input placeholder="Succursale Adress" onChange={(e) => setAdress(e.target.value)} />
-										</Form.Item>
-										<Form.Item name="societe" label="Societe" >
-											<Input placeholder="Succursale Adress" onChange={(e) => setSociete(e.target.value)} />
 										</Form.Item>
 									</Card>
 								</Col>
@@ -187,6 +185,12 @@ const ProductForm = props => {
 										</Form.Item>
 										<Form.Item name="username" label="Username">
 											<Input placeholder="Username" onChange={(e) => setUsername(e.target.value)} />
+										</Form.Item>
+										<Form.Item name="lastName" label="Nom">
+											<Input placeholder="Nom" onChange={(e) => setLastName(e.target.value)} />
+										</Form.Item>
+										<Form.Item name="prenom" label="Prenom">
+											<Input placeholder="Prenom" onChange={(e) => setPrenom(e.target.value)} />
 										</Form.Item>
 									</Card>
 								</Col>

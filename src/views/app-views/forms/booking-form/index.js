@@ -93,18 +93,22 @@ const BookingForm = props => {
         }, 2000);
 
         setTimeout(function () {
-            setIsShown(current => !current);
+            // setIsShown(current => !current);
+            setIdModal(true)
         }, 500)
         setTimeout(function () {
             addEvents();
         }, 2000)
-    }
-
-    useEffect(() => {
         setTimeout(function () {
             getRdvDispo();
         }, 2000);
-    }, [])
+    }
+
+    // useEffect(() => {
+    //     setTimeout(function () {
+    //         getRdvDispo();
+    //     }, 2000);
+    // }, [])
 
     function saveCalendrier() {
     }
@@ -124,7 +128,7 @@ const BookingForm = props => {
             .then((data) => {
                 data.forEach(e => {
                     event = {
-                        title: 'BCH237',
+                        // title: e.id,
                         start: e.start,
                         end: e.end,
                         id: e.id
@@ -200,7 +204,9 @@ const BookingForm = props => {
                 console.log(response)
                 message.success(`Rendez-vous réservé avec succes`)
             }).catch((error) => console.log(error))
-        }, 2000);
+
+            history.push(`/app/calendar`)
+        }, 4000);
     }
 
     console.log(selectedReference + ' ' + succursale)
@@ -225,17 +231,17 @@ const BookingForm = props => {
                         <Flex className="py-2" mobileFlex={false} justifyContent="between" alignItems="center">
                             <h2 className="mb-3">{mode === 'ADD' ? 'Prendre un rendez-vous' : `Edit Product`} </h2>
                             <div className="mb-3">
-                                <Button className="mr-2" onClick={() => discard()}>Discard</Button>
+                                {/* <Button className="mr-2" onClick={() => discard()}>Discard</Button>
                                 <Button type="primary" htmlType="submit" onClick={() => saveCalendrier()}>
                                     {mode === 'ADD' ? 'Add' : `Save`}
-                                </Button>
+                                </Button> */}
                             </div>
                         </Flex>
                     </div>
                 </PageHeaderAlt>
                 <div className="container">
                     <Tabs defaultActiveKey="1" style={{ marginTop: 30 }}>
-                        <TabPane tab="General Information" key="1">
+                        <TabPane tab="Booking" key="1">
                             <Row gutter={16}>
                                 <Col xs={24} sm={24} md={24}>
                                     <Card title="Basic Info">
@@ -251,7 +257,7 @@ const BookingForm = props => {
                                     </Card>
                                 </Col>
                                 <Col xs={24} sm={24} md={24}>
-                                    {isShown && (
+                                    {isModal && (
                                         <FullCalendar
                                             plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
                                             headerToolbar={{
