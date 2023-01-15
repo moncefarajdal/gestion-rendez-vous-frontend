@@ -77,14 +77,14 @@ const ProductForm = props => {
 		nom: nom,
 		chef: {
 			email: email,
-			username: username,
-			type: 'admin'
+			username: username
 		},
 		service: {
-			service: service,
 			reference: reference
 		}
 	}
+
+	console.log(succursale)
 
 	const saveSuccursale = () => {
 		SuccursaleService.saveSuccursale(succursale)

@@ -10,6 +10,10 @@ class SuccursaleService {
     getNomByChef(chef) {
         return axios.get(API_URL + 'succursale/chef/' + chef)
     }
+
+    getByService(reference) {
+        return axios.get(API_URL + 'succursale/service/reference/' + reference)
+    }
 }
 
 export default new SuccursaleService

@@ -54,8 +54,10 @@ class AuthService {
             return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
         }).join(''));
         var parsedToken = JSON.parse(jsonPayload)
-        console.log(jsonPayload)
+        console.log(parsedToken)
         var role = parsedToken['sub'].toString()
+        var userRole = parsedToken['roles'].toString()
+        localStorage.setItem('userRole', userRole.substring(1, userRole.length-1))
         localStorage.setItem('role', role)
         return JSON.parse(jsonPayload);
     }

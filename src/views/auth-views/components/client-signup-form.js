@@ -67,9 +67,11 @@ export const ClientRegisterForm = (props) => {
 	const [email, setEmail] = useState("")
 	const [cin, setCin] = useState("")
 	const [password, setPassword] = useState("")
+	const [nom, setNom] = useState("")
+	const [prenom, setPrenom] = useState("")
 
 	function handleRegister() {
-		AuthService.registerClient(username, email, password, cin)
+		AuthService.registerClient(username, email, password, cin, nom, prenom)
 			.then(response => {
 				history.push(AUTH_PREFIX_PATH + `/verification`)
 				console.log(response)
@@ -105,6 +107,20 @@ export const ClientRegisterForm = (props) => {
 				<Alert type="error" showIcon message={message}></Alert>
 			</motion.div>
 			<Form form={form} layout="vertical" name="register-form" onFinish={onSignUp}>
+				<Form.Item
+					name="nom"
+					label="Nom"
+					hasFeedback
+				>
+					<Input prefix={<MailOutlined className="text-primary" />} value={nom} onChange={(e) => setNom(e.target.value)} />
+				</Form.Item>
+				<Form.Item
+					name="prenom"
+					label="Prenom"
+					hasFeedback
+				>
+					<Input prefix={<MailOutlined className="text-primary" />} value={prenom} onChange={(e) => setPrenom(e.target.value)} />
+				</Form.Item>
 				<Form.Item
 					name="email"
 					label="Email"

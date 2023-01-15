@@ -17,27 +17,34 @@ const dashBoardNavTree = [
   },
   {
     key: 'client',
-    path: '',
-    title: 'Clients',
-    icon: UserOutlined,
+    path: `${APP_PREFIX_PATH}/client/booking`,
+    title: 'Booking',
+    icon: AppstoreOutlined,
     breadcrumb: true,
     submenu: [
       {
         key: 'apps-ecommerce',
-        path: `${APP_PREFIX_PATH}/client`,
-        title: 'Clients',
+        path: `${APP_PREFIX_PATH}/client/booking`,
+        title: 'Rendez-vous',
         icon: UserOutlined,
         breadcrumb: true,
         submenu: [
           {
             key: 'apps-ecommerce-productList',
             path: `${APP_PREFIX_PATH}/client`,
-            title: 'Clients List',
+            title: 'Booking',
             icon: '',
             breadcrumb: true,
             submenu: []
           },
-
+          {
+            key: 'apps-ecommerce-calendar',
+            path: `${APP_PREFIX_PATH}/calendar`,
+            title: 'Calendrier',
+            icon: '',
+            breadcrumb: true,
+            submenu: []
+          }
         ]
       }
     ]
@@ -118,7 +125,7 @@ const appsNavTree = [
             submenu: []
           }
         ]
-      }
+      },
     ]
   },
 ]
