@@ -88,12 +88,17 @@ const ProductForm = props => {
 
 	const saveSuccursale = () => {
 		SuccursaleService.saveSuccursale(succursale)
-		.then((response) => {
-			console.log(response);
-			message.success(`Succursale saved`);
-		}).catch(error => {
-			console.log(error)
-		})
+			.then((response) => {
+				if (response.data == -1) message.error(`Une succursale avec ce nom existe deja`)
+				else if (response.data == -2) message.error(`Veuillez saisir le nom de la succursale`)
+				else if (response.data == -4) message.error(`Veuillez saisir le chef de la succursale`)
+				else {
+					console.log(response);
+					message.success(`Succursale saved`);
+				}
+			}).catch(error => {
+				console.log(error)
+			})
 	}
 
 	const headBack = () => {

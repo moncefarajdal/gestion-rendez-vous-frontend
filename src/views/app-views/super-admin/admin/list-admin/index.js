@@ -1,4 +1,4 @@
-import React, {useState,useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import { Card, Table, Select, Input, Button, Badge, Menu } from 'antd';
 import ProductListData from "assets/data/product-list.data.json"
 import { EyeOutlined, DeleteOutlined, SearchOutlined, PlusCircleOutlined } from '@ant-design/icons';
@@ -14,13 +14,13 @@ import axios from 'axios';
 const { Option } = Select
 
 const getStockStatus = stockCount => {
-	if(stockCount >= 10) {
+	if (stockCount >= 10) {
 		return <><Badge status="success" /><span>In Stock</span></>
 	}
-	if(stockCount < 10 && stockCount > 0) {
+	if (stockCount < 10 && stockCount > 0) {
 		return <><Badge status="warning" /><span>Limited Stock</span></>
 	}
-	if(stockCount === 0) {
+	if (stockCount === 0) {
 		return <><Badge status="error" /><span>Out of Stock</span></>
 	}
 	return null
@@ -56,19 +56,19 @@ const AdminList = () => {
 			</Menu.Item>
 		</Menu>
 	);
-	
+
 	const addAdmin = () => {
 		history.push(`/app/super-admin/admin/add-admin`)
 	}
-	
+
 	const viewDetails = row => {
 		history.push(`/app/apps/ecommerce/edit-product/${row.id}`)
 	}
-	
+
 	const deleteRow = row => {
 		const objKey = 'id'
 		let data = list
-		if(selectedRows.length > 1) {
+		if (selectedRows.length > 1) {
 			selectedRows.forEach(elm => {
 				data = utils.deleteArrayRow(data, objKey, elm.id)
 				setList(data)
@@ -84,83 +84,37 @@ const AdminList = () => {
 		{
 			title: 'ID',
 			dataIndex: 'id',
-			key:'id'
+			key: 'id'
 		},
 		{
 			title: 'First Name',
 			dataIndex: 'prenom',
-			key:'prenom'
+			key: 'prenom'
 		},
-        {
+		{
 			title: 'Last Name',
 			dataIndex: 'nom',
-			key:'nom'
+			key: 'nom'
 		},
 		{
 			title: 'Email',
 			dataIndex: 'email',
-			key:'email'
+			key: 'email'
 		},
-        {
+		{
 			title: 'Username',
 			dataIndex: 'username',
-			key:'username'
+			key: 'username'
 		},
 		{
 			title: 'Action',
 			dataIndex: '',
 			render: (text, admin) => (
-			  <Button onClick={() => handleDelete(admin.id)}>Delete</Button>
+				<Button onClick={() => handleDelete(admin.id)}>Delete</Button>
 			),
-		  },
-		
-		
-		// {
-		// 	title: 'Product',
-		// 	dataIndex: 'name',
-		// 	render: (_, record) => (
-		// 		<div className="d-flex">
-		// 			<AvatarStatus size={60} type="square" src={record.image} name={record.name}/>
-		// 		</div>
-		// 	),
-		// 	sorter: (a, b) => utils.antdTableSorter(a, b, 'name')
-		// },
-		// {
-		// 	title: 'Category',
-		// 	dataIndex: 'category',
-		// 	sorter: (a, b) => utils.antdTableSorter(a, b, 'category')
-		// },
-		// {
-		// 	title: 'Price',
-		// 	dataIndex: 'price',
-		// 	render: price => (
-		// 		<div>
-		// 			<NumberFormat
-		// 				displayType={'text'} 
-		// 				value={(Math.round(price * 100) / 100).toFixed(2)} 
-		// 				prefix={'$'} 
-		// 				thousandSeparator={true} 
-		// 			/>
-		// 		</div>
-		// 	),
-		// 	sorter: (a, b) => utils.antdTableSorter(a, b, 'price')
-		// },
-		// {
-		// 	title: 'Stock',
-		// 	dataIndex: 'stock',
-		// 	sorter: (a, b) => utils.antdTableSorter(a, b, 'stock')
-		// },
-		// {
-		// 	title: 'Status',
-		// 	dataIndex: 'stock',
-		// 	render: stock => (
-		// 		<Flex alignItems="center">{getStockStatus(stock)}</Flex>
-		// 	),
-		// 	sorter: (a, b) => utils.antdTableSorter(a, b, 'stock')
-		// },
-		
+		},
 	];
-	
+
 	const rowSelection = {
 		onChange: (key, rows) => {
 			setSelectedRows(rows)
@@ -170,14 +124,14 @@ const AdminList = () => {
 
 	const onSearch = e => {
 		const value = e.currentTarget.value
-		const searchArray = e.currentTarget.value? list : ProductListData
+		const searchArray = e.currentTarget.value ? list : ProductListData
 		const data = utils.wildCardSearch(searchArray, value)
 		setList(data)
 		setSelectedRowKeys([])
 	}
 
 	const handleShowCategory = value => {
-		if(value !== 'All') {
+		if (value !== 'All') {
 			const key = 'category'
 			const data = utils.filterArray(ProductListData, key, value)
 			setList(data)
@@ -185,42 +139,42 @@ const AdminList = () => {
 			setList(ProductListData)
 		}
 	}
-	const [admins ,setAdmins]=useState([])
-	useEffect(()=>{
-          loadAdmin();
-	},[]);
-	const loadAdmin=async()=>{
-		const result =await axios.get("http://localhost:8090/api/v1/type/admin")
-		setAdmins(result.data.map(row=>({id:row.id,prenom:row.prenom,nom:row.nom,email:row.email,username:row.username})))
+	const [admins, setAdmins] = useState([])
+	useEffect(() => {
+		loadAdmin();
+	}, []);
+	const loadAdmin = async () => {
+		const result = await axios.get("http://localhost:8090/api/v1/type/admin")
+		setAdmins(result.data.map(row => ({ id: row.id, prenom: row.prenom, nom: row.nom, email: row.email, username: row.username })))
 		console.log(result.data);
 	};
 	function handleDelete(id) {
 		// Make a DELETE request to the API endpoint for deleting the data
 		axios.delete(`http://localhost:8090/api/v1/technicien/reference/${id}`)
-		  .then(response => {
-			console.log(response);
-			// If the request is successful, update the state to remove the deleted item
-			// and re-render the table
-			setAdmins(admins.filter(item => item.id !== id));
-		  })
-		  .catch(error => {
-			console.log(error);
-		  });
-	  }
+			.then(response => {
+				console.log(response);
+				// If the request is successful, update the state to remove the deleted item
+				// and re-render the table
+				setAdmins(admins.filter(item => item.id !== id));
+			})
+			.catch(error => {
+				console.log(error);
+			});
+	}
 
 	return (
 		<Card>
 			<Flex alignItems="center" justifyContent="between" mobileFlex={false}>
 				<Flex className="mb-1" mobileFlex={false}>
 					<div className="mr-md-3 mb-3">
-						<Input placeholder="Search" prefix={<SearchOutlined />} onChange={e => onSearch(e)}/>
+						<Input placeholder="Search" prefix={<SearchOutlined />} onChange={e => onSearch(e)} />
 					</div>
 					<div className="mb-3">
-						<Select 
-							defaultValue="All" 
-							className="w-100" 
-							style={{ minWidth: 180 }} 
-							onChange={handleShowCategory} 
+						<Select
+							defaultValue="All"
+							className="w-100"
+							style={{ minWidth: 180 }}
+							onChange={handleShowCategory}
 							placeholder="Category"
 						>
 							<Option value="All">All</Option>
@@ -238,10 +192,10 @@ const AdminList = () => {
 				</div>
 			</Flex>
 			<div className="table-responsive">
-				<Table 
-					columns={tableColumns} 
-					dataSource={admins} 
-					rowKey='id' 
+				<Table
+					columns={tableColumns}
+					dataSource={admins}
+					rowKey='id'
 					rowSelection={{
 						selectedRowKeys: selectedRowKeys,
 						type: 'checkbox',
