@@ -1,18 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import PageHeaderAlt from 'components/layout-components/PageHeaderAlt'
 import Flex from 'components/shared-components/Flex'
-import ProductListData from "assets/data/product-list.data.json"
 import { Tabs, Button, Input, Row, Col, Card, Form, Upload, InputNumber, message, Select, DatePicker } from 'antd';
-import axios from 'axios'
-import SuccursaleService from 'services/SuccursaleService'
-import save from 'save'
-import service from 'auth/FetchInterceptor'
-import { ImageSvg } from 'assets/svg/icon';
-import CustomIcon from 'components/util-components/CustomIcon'
-import { LoadingOutlined } from '@ant-design/icons';
-import TechnicianService from 'services/TechnicianService'
 import { useHistory } from 'react-router-dom'
 import moment from 'moment'
+import CalendrierService from 'services/CalendrierService';
 // import DatePicker from "react-datepicker";
 // import "react-datepicker/dist/react-datepicker.css";
 
@@ -37,25 +29,19 @@ const EDIT = 'EDIT'
 const RDVForm = props => {
 
 	let history = useHistory()
+	const formRef = React.createRef();
 
 	const { mode = ADD, param } = props
 	const [form] = Form.useForm();
 	const [listTechniciens, setListTechniciens] = useState([{ 'nom': '', 'id': '', 'prenom': '', 'username': '' }])
-
 	const [selectedUsername, setSelectedUsername] = useState('')
 	const [heureDebut, setHeureDebut] = useState('')
 	const [heureFin, setHeureFin] = useState('')
-
 	const [date, setDate] = useState('')
-	// const [date, setDate] = useState(moment().format())
 
-	// useEffect(() => {
-	// 	TechnicianService.getAll().then((response) => {
-	// 		setListTechniciens(response.data)
-	// 		console.log(listTechniciens)
-	// 	})
-	// 	.catch(error => console.log(error))
-	// }, []);
+	const onReset = () => {
+		formRef.current.resetFields();
+	};
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -71,9 +57,9 @@ const RDVForm = props => {
 		history.push(`/app/admin/technician/list-technician`)
 	}
 
-	const handleChange = (event) =>{
-        setSelectedUsername(event);
-    }
+	const handleChange = (event) => {
+		setSelectedUsername(event);
+	}
 
 	const rdv = {
 		start: heureDebut,
@@ -87,10 +73,21 @@ const RDVForm = props => {
 	console.log(rdv)
 	console.log(moment().format())
 
+	function saveCalendrier() {
+		CalendrierService.saveCalendrier(rdv)
+			.then((response) => {
+				console.log(response)
+				message.success(`Success`);
+				onReset()
+			})
+			.catch((error) => console.log(error))
+	}
+
 	return (
 		<>
 			<Form
 				layout="vertical"
+				ref={formRef}
 				form={form}
 				name="advanced_search"
 				className="ant-advanced-search-form"
@@ -103,10 +100,10 @@ const RDVForm = props => {
 				<PageHeaderAlt className="border-bottom" overlap>
 					<div className="container">
 						<Flex className="py-2" mobileFlex={false} justifyContent="between" alignItems="center">
-							<h2 className="mb-3">{mode === 'ADD' ? 'Add Technician' : `Edit Product`} </h2>
+							<h2 className="mb-3">{mode === 'ADD' ? 'Generer les rendez-vous disponibles' : `Edit Product`} </h2>
 							<div className="mb-3">
 								<Button className="mr-2" onClick={() => discard()}>Discard</Button>
-								<Button type="primary" htmlType="submit" >
+								<Button type="primary" htmlType="submit" onClick={() => saveCalendrier()}>
 									{mode === 'ADD' ? 'Add' : `Save`}
 								</Button>
 							</div>

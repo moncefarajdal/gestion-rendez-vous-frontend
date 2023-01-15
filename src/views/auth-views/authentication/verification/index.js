@@ -23,13 +23,13 @@ const Verification = () => {
                     <Row align="middle">
                         <Col xs={24} sm={24} md={8}>
                             <h1 className="font-weight-bold mb-4 display-4">Please verify your email</h1>
-                            <p className="font-size-md mb-4">Kidnly verify your email address in order to complete your registration.</p>
+                            <p className="font-size-md mb-4">Check your email & click the link to activate your account.</p>
                             <Link to='/app'>
                                 <Button type="primary" icon={<ArrowLeftOutlined />} onClick={() => login()}>Go back</Button>
                             </Link>
                         </Col>
                         <Col xs={24} sm={24} md={{ span: 14, offset: 2 }}>
-                            <img className="img-fluid mt-md-0 mt-4" src="/img/others/img-20.png" alt="" />
+                            <img className="img-fluid mt-md-0 mt-4" src="/img/others/email-verification.jpg" alt="" />
                         </Col>
                     </Row>
                 </div>
